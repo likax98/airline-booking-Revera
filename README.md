@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Airline Booking Form Assessment
+
+## Introduction
+
+This assessment evaluates your skills in React and Next.js by having you construct an airline booking form using the `AirlineForm.tsx` component and dummy data in `Page.tsx`.
+
+## Requirements
+
+- Node.js (>= 18.x)
+- npm or yarn
 
 ## Getting Started
 
-First, run the development server:
+1. Fork this repository.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Clone your fork:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```shell
+   git clone
+   cd <cloned-repository>
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```shell
+   npm install
+   # or
+   yarn install
+   ```
 
-## Learn More
+4. Run the development server:
+   ```shell
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Design file is available in https://www.figma.com/file/oFdDYD6Ca1v3Iz6oxEoej0/Untitled?type=design&node-id=0%3A1&mode=design&t=knYsW49Xi9rnV5rg-1
+The resulting component should look relatively similar. We don't expect pixel perfect, the design is made by a developer.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Assignment Task
 
-## Deploy on Vercel
+1. Open and work on `AirlineForm.tsx`.
+2. Populate the airline booking form using dummy data from `Page.tsx`.
+3. Create selection options for 'To' and 'From' destinations and 'One Way' or 'Round Trip'.
+4. Implement the following functionalities:
+   - Disable dates in the calendar based on the selected city.
+   - Prompt the user to select a new date if an unavailable date is selected.
+5. Implement form validation.
+6. Style the component using [TailwindCSS](https://tailwindcss.com/). Ensure it provides a user-friendly and responsive experience.
+7. Submit the form to https://eo5eo2dqy2y0ds6.m.pipedream.net via POST request with data as application/json
+8. The endpoint will respond with a status, timestamp and bookingId. Display those in the form as you see fit.
+9. Deploy the project to
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Expectations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Clean and maintainable code
+- Proper handling of component state and props
+- Adequate documentation and comments
+
+## Submission
+
+1. Fork this repository to your GitHub account.
+2. Complete the assignment.
+3. Push your code to your fork.
+4. Submit a link to your forked repository for review.
+
+## Evaluation Criteria
+
+- Functionality
+- Code Quality
+- User Experience
+- Responsiveness
+- Documentation
+
+## Support
+
+For any questions, reach out to your assessment coordinator.
+
+## License
+
+This project is licensed under the MIT License.
