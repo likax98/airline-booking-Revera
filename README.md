@@ -62,6 +62,7 @@ The resulting component should look relatively similar. We don't expect pixel pe
 - Clean and maintainable code
 - Proper handling of component state and props
 - Adequate documentation and comments
+- Usage of unstyled components for out of the box functionality and accessibility (e.g RadixUI, HeadlessUI, ShadCDN)
 
 ## Submission
 
