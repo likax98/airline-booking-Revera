@@ -51,9 +51,11 @@ The resulting component should look relatively similar. We don't expect pixel pe
    - Prompt the user to select a new date if an unavailable date is selected.
 5. Implement form validation.
 6. Style the component using [TailwindCSS](https://tailwindcss.com/). Ensure it provides a user-friendly and responsive experience.
-7. Submit the form to https://eo5eo2dqy2y0ds6.m.pipedream.net via POST request with data as application/json
-8. The endpoint will respond with a status, timestamp and bookingId. Display those in the form as you see fit.
-9. Deploy the project to Vercel.
+7. Update the URL on input change, so we can navigate back to the page with selected inputs.
+   - Example ?origin=LON&type=one-way&destination=NEW&departureDate=2023-10-04&returnDate=2023-11-01 
+9. Submit the form to https://eo5eo2dqy2y0ds6.m.pipedream.net via POST request with data as application/json
+10. The endpoint will respond with a status, timestamp and bookingId. Display those in the form as you see fit.
+11. Deploy the project to Vercel.
 
 ## Expectations
 
