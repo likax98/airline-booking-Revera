@@ -38,6 +38,7 @@ This assessment evaluates your skills in React and Next.js by having you constru
 ## Design
 
 Design file is available in https://www.figma.com/file/oFdDYD6Ca1v3Iz6oxEoej0/Untitled?type=design&node-id=0%3A1&mode=design&t=knYsW49Xi9rnV5rg-1
+
 The resulting component should look relatively similar. We don't expect pixel perfect, the design is made by a developer.
 
 ## Assignment Task
@@ -52,7 +53,7 @@ The resulting component should look relatively similar. We don't expect pixel pe
 6. Style the component using [TailwindCSS](https://tailwindcss.com/). Ensure it provides a user-friendly and responsive experience.
 7. Submit the form to https://eo5eo2dqy2y0ds6.m.pipedream.net via POST request with data as application/json
 8. The endpoint will respond with a status, timestamp and bookingId. Display those in the form as you see fit.
-9. Deploy the project to
+9. Deploy the project to Vercel.
 
 ## Expectations
 
