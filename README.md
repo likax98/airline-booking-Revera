@@ -39,7 +39,7 @@ This assessment evaluates your skills in React and Next.js by having you constru
 
 Design file is available in https://www.figma.com/file/oFdDYD6Ca1v3Iz6oxEoej0/Untitled?type=design&node-id=0%3A1&mode=design&t=knYsW49Xi9rnV5rg-1
 
-The resulting component should look relatively similar. We don't expect pixel perfect, the design is made by a developer.
+The resulting component should look relatively similar. We don't expect pixel perfect, the design is made by a developer. Take note of the comments, that describe that the calendar should appear with an animation when date pickers are pressed.
 
 ## Assignment Task
 
