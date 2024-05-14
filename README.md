@@ -54,7 +54,7 @@ The resulting component should look relatively similar. We don't expect pixel pe
 7. Update the URL on input change, so we can navigate back to the page with selected inputs.
    - Example ?origin=LON&type=one-way&destination=NEW&departureDate=2023-10-04&returnDate=2023-11-01 
 9. Submit the form to https://request-bin-gin-2h5as7tczq-lz.a.run.app/ via POST request with data as application/json.
-10. This is a mock API, and has authentication with a hardcoded Auth key. It should be stored in header x-auth-key with value EsjanIsAMountainInIceland. Be mindful of how you do this request, you would not want to expose this super secret auth key to the internet.
+    - This is a mock API, and has authentication with a hardcoded Auth key. It should be stored in header x-auth-key with value EsjanIsAMountainInIceland. Be mindful of how you do this request, you would not want to expose this super secret auth key to the internet.
 12. The endpoint will respond with a status, timestamp and bookingId. Display those in the form as you see fit.
 13. Deploy the project to Vercel.
 
