@@ -70,7 +70,7 @@ The resulting component should look relatively similar. We don't expect pixel pe
 1. Fork this repository to your GitHub account.
 2. Complete the assignment.
 3. Push your code to your fork.
-4. Invite @snaebjor and @egillanton to your fork for review.
+4. Invite @thordisj to your fork for review.
 
 ## Evaluation Criteria
 
