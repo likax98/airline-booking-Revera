@@ -6,7 +6,7 @@ This assessment evaluates your skills in React and Next.js by having you constru
 
 ## Requirements
 
-- Node.js (>= 18.x)
+- Node.js (>= 20.x)
 - npm or yarn
 
 ## Getting Started
