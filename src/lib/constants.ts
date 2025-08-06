@@ -1,0 +1,1 @@
+export const DAYS_OF_WEEK_INDEXES = Array.from({ length: 7 }, (_, i) => i);
