@@ -78,7 +78,7 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
           className={cn(
             "flex rounded-2xl border border-gray-200 bg-white shadow-lg",
             "px-6",
-            "sm:p-10 lg:p-20 xl:gap-40"
+            "gap-20 sm:p-10 lg:p-12 xl:gap-26 xl:p-20"
           )}>
           <FormProvider {...form}>
             <form
