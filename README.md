@@ -1,88 +1,165 @@
-# Next.js Airline Booking Form Assessment
+# ✈️ Digido Airline Booking Form
 
-## Introduction
 
-This assessment evaluates your skills in React and Next.js by having you construct an airline booking form using the `AirlineForm.tsx` component and dummy data in `Page.tsx`.
+A modern flight booking form built with **Next.js**, **TailwindCSS**, and **React Hook Form**.  
+Features real-time validation, route + date selection, synced URL query params, and UI state management via context.
 
-## Requirements
+Includes unit tests (Jest, RTL) and E2E tests (Playwright).
 
-- Node.js (>= 20.x)
-- npm or yarn
+I recommend reading the full documentation for more in-depth details about the features before diving into the code:
+**[Confluence](https://likakharatishvili01.atlassian.net/wiki/external/Mzg2YzFiNGNiMzU2NGMwNmFiYjAxNGU1ODNmMjkzNzI)**
 
-## Getting Started
+Deployed on **[Vercel](https://airline-booking-revera-ywoq.vercel.app/)**
 
-1. Fork this repository.
+Original **[Design](https://www.figma.com/file/oFdDYD6Ca1v3Iz6oxEoej0/Untitled?type=design&node-id=0%3A1&mode=design&t=knYsW49Xi9rnV5rg-1)** (I've changed a bit since paddings were very inconstant)
 
-2. Clone your fork:
+---
 
-   ```shell
-   git clone
-   cd <cloned-repository>
-   ```
+## 🧠 Features
 
-3. Install dependencies:
+- **Fully typed** with TypeScript (I prefer typing everything strictly)
+- **Dynamic form** with validation  
+- **Date picker calendar**  
+- **ShadCN UI components**  
+- **Zod validation**  
+- **Storybook for isolated UI testing**  
+- **Playwright for E2E**  
+- **Jest, RTL for unit tests**
 
-   ```shell
-   npm install
-   # or
-   yarn install
-   ```
+---
 
-4. Run the development server:
-   ```shell
-   npm run dev
-   # or
-   yarn dev
-   ```
+## 🏗️ Stack
 
-## Design
+- **Next.js 14+**  
+- **React**  
+- **TypeScript**  
+- **React Hook Form**  
+- **Zod**  
+- **ShadCN UI**  
+- **Jest / Testing Library**  
+- **Playwright**  
+- **Storybook**
 
-Design file is available in https://www.figma.com/file/oFdDYD6Ca1v3Iz6oxEoej0/Untitled?type=design&node-id=0%3A1&mode=design&t=knYsW49Xi9rnV5rg-1
+---
 
-The resulting component should look relatively similar. We don't expect pixel perfect, the design is made by a developer. Take note of the comments, that describe that the calendar should appear with an animation when date pickers are pressed.
+## 🧪 File Naming
 
-## Assignment Task
+- `*.test.tsx` → Unit/Integration tests (Jest + RTL)  
+- `*.spec.tsx` → End-to-End tests (Playwright)  
+- `*.stories.tsx` → Storybook  
+- `*.utils.ts` → Utility functions  
+- `lib/` → Global logic  
+- `components/*/lib` → Component-scoped logic  
 
-1. Open and work on `AirlineForm.tsx`.
-2. Populate the airline booking form using dummy data from `Page.tsx`.
-3. Create selection options for 'To' and 'From' destinations and 'One Way' or 'Round Trip'.
-4. Implement the following functionalities:
-   - Disable dates in the calendar based on the selected city.
-   - Prompt the user to select a new date if an unavailable date is selected.
-5. Implement form validation.
-6. Style the component using [TailwindCSS](https://tailwindcss.com/). Ensure it provides a user-friendly and responsive experience.
-7. Update the URL on input change, so we can navigate back to the page with selected inputs.
-   - Example ?origin=LON&type=one-way&destination=NEW&departureDate=2023-10-04&returnDate=2023-11-01 
-9. Submit the form to https://airline-booking-nine.vercel.app/api/booking via POST request with data as application/json.
-12. The endpoint will respond with a status, timestamp and bookingId. Display those in the form as you see fit.
-13. Deploy the project to Vercel.
+---
 
-## Expectations
+## 🗂️ Folder Structure
 
-- Clean and maintainable code
-- Proper handling of component state and props
-- Adequate documentation and comments
-- Usage of unstyled components for out of the box functionality and accessibility (e.g RadixUI, HeadlessUI, ShadCDN)
+```text
+src/
+├── app/                      # Next.js App Router entry & layout
+│   ├── globals.css           # Global styles
+│   ├── layout.tsx            # Root layout
+│   └── page.tsx              # Home page
+├── components/               # Feature-based components
+│   ├── home/
+│   │   └── AirlineForm/     
+│   │       ├── components/      # Subfields (Date, Route, Flight Type)
+│   │       ├── context/         # Form context (FlightDateFieldContext)
+│   │       ├── hooks/           # Syncing logic (URL, date fields)
+│   │       ├── lib/             # Constants, utils, validation
+│   │       ├── __mocks__/       # Storybook/testing mocks
+│   │       ├── AirlineForm.tsx
+│   │       ├── AirlineForm.test.tsx     # Unit/integration tests
+│   │       ├── AirlineForm.spec.tsx     # Playwright E2E test
+│   │       ├── AirlineForm.stories.tsx  # Storybook config
+│   ├── shared/               # Shared UI (e.g. <Bounded />)
+│   └── ui/                   # shadcn-generated UI primitives
+├── hooks/                    # Global reusable hooks
+├── lib/  
+│   ├── constants             # Common constants
+│   └── utils/                # Common utilities (string, date, URL)
+├── types/                    # Global types/interfaces (optional)
+├── pages/                    # (If used for legacy routes)
+```
 
-## Submission
+---
 
-1. Fork this repository to your GitHub account.
-2. Complete the assignment.
-3. Push your code to your fork.
-4. Invite @thordisj to your fork for review.
+## 📦 Requirements
 
-## Evaluation Criteria
+- Node.js `>=18`  
+- Yarn `>=1.22`
 
-- Functionality
-- Code Quality
-- User Experience
-- Responsiveness
-- Documentation
+---
 
-## Support
+## 🚀 Getting Started
 
-For any questions, reach out to your assessment coordinator.
+```bash
+# Install dependencies
+yarn install
 
-## License
+# Run the dev server
+yarn dev
+```
 
-This project is licensed under the MIT License.
+---
+
+## 🧪 Testing
+
+### Unit Tests (Jest)
+
+- **Run all unit tests**  
+  `yarn test`
+
+- **Run a specific test file**  
+  `yarn test:unit src/components/home/AirlineForm/AirlineForm.test.tsx`
+
+---
+
+### E2E Tests (Playwright)
+
+- **Run all E2E tests**  
+  `yarn test:e2e`
+
+- **Run Playwright in UI mode**  
+  `yarn playwright --ui`
+
+- **Run a specific E2E test file**  
+  `npx playwright test src/components/home/AirlineForm/AirlineForm.spec.tsx`
+
+⚠️ Make sure the dev server is running (`yarn dev`) before launching E2E tests.
+
+---
+
+## 📚 Storybook
+
+- **Launch Storybook**  
+  `yarn storybook`  
+  Opens at: [http://localhost:6006](http://localhost:6006)
+
+---
+
+## 🧼 Lint & Format
+
+- **Lint the codebase**  
+  `yarn lint`
+
+- **Format all files**  
+  `yarn format`
+
+---
+
+## 🔧 VS Code Recommended Extensions
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)  
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)  
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)  
+- [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest)  
+- [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
+
+---
+
+## ✍️ Author
+
+Built with ❤️ by [@likax98](https://github.com/likax98)
+

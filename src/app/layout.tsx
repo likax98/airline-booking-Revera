@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito, Nunito_Sans } from "next/font/google";
 
+import { Toaster } from "@/components/ui/toaster";
+
 const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
@@ -29,6 +31,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(nunito.variable, nunitoSans.variable)}>
         {children}
+
+        <Toaster />
       </body>
     </html>
   );
