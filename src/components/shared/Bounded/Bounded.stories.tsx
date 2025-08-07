@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "A layout container that adds consistent horizontal padding and centers content with a max width",
+          "The layout container that adds consistent horizontal padding and centers content with a max width",
       },
     },
   },

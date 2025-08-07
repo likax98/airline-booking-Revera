@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "A loading indicator component used as a fallback in Suspense or loading states",
+          "The loading indicator component used as a fallback in Suspense or loading states",
       },
     },
   },

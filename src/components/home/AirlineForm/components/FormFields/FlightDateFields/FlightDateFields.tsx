@@ -10,7 +10,6 @@ import { DATE_FIELDS_CONFIG } from "@/components/home/AirlineForm/lib";
 
 import { DateSelectButton } from "./DateSelectButton";
 
-// A wrapper for the return date and the departure date selection fields in the booking form
 export const FlightDateFields = (): JSX.Element => (
   <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-12">
     {DATE_FIELDS_CONFIG.map(({ name, label }) => (

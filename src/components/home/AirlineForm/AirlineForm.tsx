@@ -35,7 +35,6 @@ interface Props {
   destinations: FlightDestination[];
 }
 
-/** The full booking form with fields and calendar */
 export const AirlineForm = ({ destinations }: Props): JSX.Element => {
   const searchParams = useSearchParams();
   const cities = destinations.map(({ city }) => city);

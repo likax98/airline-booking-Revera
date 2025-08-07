@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import { withMockFlightDateFieldContext } from "@storybook/decorators/FlightDateProviderDecorator";
+import { withDateFieldContext } from "@storybook/decorators/DateFieldDecorator";
 import { destinations } from "@/data";
 import { bookingFormDefaultValues } from "@/components/home/AirlineForm/__mocks___";
 
@@ -9,7 +9,7 @@ import { FlightDateCalendar } from "./FlightDateCalendar";
 export default {
   title: "Home/AirlineForm/FlightDateCalendar",
   component: FlightDateCalendar,
-  decorators: [withMockFlightDateFieldContext],
+  decorators: [withDateFieldContext],
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

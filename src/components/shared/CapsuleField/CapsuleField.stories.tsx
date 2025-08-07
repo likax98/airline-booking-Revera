@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "Floating label wrapper for form controls with consistent error styling",
+          "The floating label wrapper for form controls with consistent error styling",
       },
     },
   },

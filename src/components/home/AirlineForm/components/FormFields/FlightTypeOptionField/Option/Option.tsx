@@ -13,7 +13,6 @@ export interface OptionProps {
   onChange: (e: FlightOptionType) => void;
 }
 
-/** A radio button group for flight type selection */
 export const Option = ({ value, onChange }: OptionProps): JSX.Element => (
   <RadioGroup className="flex gap-6" onValueChange={onChange} {...{ value }}>
     {FLIGHT_OPTIONS.map((option) => (

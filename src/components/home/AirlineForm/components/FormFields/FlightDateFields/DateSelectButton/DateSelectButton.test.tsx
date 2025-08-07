@@ -62,7 +62,7 @@ describe("FlightDateFields > DateSelectButton", () => {
     mockSetActiveDateField.mockClear();
   });
 
-  it("renders label correctly", () => {
+  it("renders correctly", () => {
     const { getByText } = renderComponent({ value: new Date() });
 
     expect(getByText(label)).toBeInTheDocument();

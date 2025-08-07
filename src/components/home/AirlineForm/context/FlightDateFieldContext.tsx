@@ -1,5 +1,3 @@
-// context.ts
-
 import {
   createContext,
   useContext,

@@ -22,7 +22,6 @@ export interface CapsuleSelectProps {
   onChange: (value: string) => void;
 }
 
-// A capsule-shaped dropdown select with dynamic options
 // Shadcn Select renders its placeholder and dropdown with a delay because it mounts via a portal after hydration
 export const CapsuleSelect = ({
   label,

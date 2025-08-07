@@ -16,8 +16,6 @@ export interface DateSelectButtonProps {
   hasError?: boolean;
 }
 
-// Capsule-style date selector button component for return and departure dates
-// Toggles a calendar based on active field state
 export const DateSelectButton = ({
   label,
   value,
@@ -32,19 +30,22 @@ export const DateSelectButton = ({
     setActiveDateField((prev) => (prev === label ? undefined : label));
   };
 
+  const errorStyles = getErrorStyles(hasError, [
+    "text",
+    "border",
+    "placeholder",
+  ]);
+  const placeholder = formatLabeledText("Select", label, "Date");
+
   return (
     <CapsuleField {...{ label, hasError }}>
       <Button
-        className={cn(
-          "h-full",
-          isActiveDataField && "bg-blue-50",
-          getErrorStyles(hasError, ["text", "border", "placeholder"])
-        )}
+        className={cn("h-full", isActiveDataField && "bg-blue-50", errorStyles)}
         type="button"
         variant="capsuleDate"
         aria-label={getDateAriaLabel(label, date)}
         onClick={toggle}>
-        {date ? formatDate(date) : formatLabeledText("Select", label, "Date")}
+        {date ? formatDate(date) : placeholder}
       </Button>
     </CapsuleField>
   );

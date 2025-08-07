@@ -14,7 +14,6 @@ export interface CapsuleFieldProps {
   children: ReactNode;
 }
 
-/** Floating label wrapper for form controls with consistent error styling */
 export const CapsuleField = ({
   id,
   label,

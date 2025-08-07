@@ -8,7 +8,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// A layout container that adds consistent horizontal padding and centers content with a max width
 export const Bounded = ({
   as: Comp = "section",
   className,

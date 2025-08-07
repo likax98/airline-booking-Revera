@@ -3,9 +3,7 @@ import { toast } from "@/hooks/use-toast";
 import type { BookingFormValuesType } from "../types";
 import { ERROR_MESSAGES, MESSAGES } from "../constants";
 
-/**
- * Submits a booking request to the API and triggers toast notifications
- */
+// Submits a booking request to the API and triggers toast notifications
 export const submitBooking = async (
   data: BookingFormValuesType
 ): Promise<void> => {

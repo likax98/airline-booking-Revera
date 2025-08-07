@@ -35,6 +35,7 @@ const requiredMessages = [
 const renderComponent = (): RenderResult =>
   render(<AirlineForm {...{ destinations }} />);
 
+// The form submission is tested in Playwright, check "AirplaneForm.spec.tsx"
 describe("AirlineForm", () => {
   beforeAll(() => {
     // Needed for Shadcn
@@ -73,5 +74,3 @@ it("shows validation errors when submitting empty form", async () => {
     });
   });
 });
-
-// The form submission is tested in Playwright, check "AirplaneForm.spec.tsx"

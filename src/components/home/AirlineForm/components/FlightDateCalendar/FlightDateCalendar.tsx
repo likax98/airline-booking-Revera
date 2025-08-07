@@ -4,6 +4,7 @@ import { Control, UseFormSetValue } from "react-hook-form";
 
 import { cn } from "@/lib/utils/classnames";
 import type { FlightDestination } from "@/types";
+import { useCalendarLogic } from "@/components/home/AirlineForm/hooks";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -12,7 +13,6 @@ import {
   TEST_IDS,
 } from "@/components/home/AirlineForm/lib";
 import { getCalendarWarningMessage } from "@/components/home/AirlineForm/lib/helpers";
-import { useCalendarLogic } from "@/components/home/AirlineForm/hooks";
 
 export interface FlightDateCalendarProps {
   className?: string;
@@ -21,7 +21,6 @@ export interface FlightDateCalendarProps {
   setValue: UseFormSetValue<BookingFormValuesType>;
 }
 
-// A calendar for selecting flight departure and return dates
 export const FlightDateCalendar = ({
   className,
   destinations,

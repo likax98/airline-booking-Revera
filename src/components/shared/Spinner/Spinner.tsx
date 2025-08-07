@@ -6,7 +6,6 @@ interface Props {
   className?: string;
 }
 
-// A loading indicator component used as a fallback in Suspense or loading states
 // You can see how it looks in Storybook
 export const Spinner = ({ className }: Props) => (
   <div

@@ -16,7 +16,6 @@ import {
 } from "@/components/home/AirlineForm/lib";
 import { getRoutesConfig } from "@/components/home/AirlineForm/lib/helpers";
 
-// A origin and destination fields wrapper in the flight booking form
 export const RouteFields = ({
   control,
   cities,

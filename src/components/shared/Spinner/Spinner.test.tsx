@@ -3,9 +3,11 @@ import { Suspense, lazy } from "react";
 
 import { Spinner } from "./Spinner";
 
+const text = "Loaded Component";
+
 const LazyFakeComponent = lazy(() =>
   Promise.resolve({
-    default: () => <div>Loaded Component</div>,
+    default: () => <div>{text}</div>,
   })
 );
 
@@ -28,7 +30,7 @@ describe("Suspense fallback with Spinner", () => {
     const { getByText } = renderComponent();
 
     await waitFor(() => {
-      expect(getByText("Loaded Component")).toBeInTheDocument();
+      expect(getByText(text)).toBeInTheDocument();
     });
   });
 });

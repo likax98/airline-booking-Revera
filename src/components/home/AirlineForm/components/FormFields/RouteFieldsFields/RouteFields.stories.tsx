@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 
-import { withMockFlightDateFieldContext } from "@storybook/decorators/FlightDateProviderDecorator";
+import { withDateFieldContext } from "@storybook/decorators/DateFieldDecorator";
 import {
   bookingFormDefaultValues,
   mockCities,
@@ -11,14 +11,14 @@ import { RouteFields } from "./RouteFields";
 export default {
   title: "Home/AirlineForm/Fields/RouteFields",
   component: RouteFields,
-  decorators: [withMockFlightDateFieldContext],
+  decorators: [withDateFieldContext],
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "A origin and destination fields wrapper in the flight booking form",
+          "The origin and the destination fields wrapper in the flight booking form",
       },
     },
   },
