@@ -28,7 +28,7 @@ export const Default = () => {
 
   return (
     <FormProvider {...form}>
-      <FlightDateFields />
+      <FlightDateFields control={form.control} />
     </FormProvider>
   );
 };

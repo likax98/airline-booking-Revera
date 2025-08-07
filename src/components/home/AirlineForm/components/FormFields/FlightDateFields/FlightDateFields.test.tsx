@@ -20,7 +20,7 @@ const TestWrapper = (): JSX.Element => {
 
   return (
     <FormProvider {...form}>
-      <FlightDateFields />
+      <FlightDateFields control={form.control} />
     </FormProvider>
   );
 };
