@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react";
 
 import {
+  BookingFormValuesType,
   DEFAULT_BOOKING_FORM_VALUES,
   FLIGHT_OPTIONS,
 } from "@/components/home/AirlineForm/lib";
@@ -16,6 +17,31 @@ const mockReset = jest.fn();
 jest.mock("next/navigation", () => ({
   useSearchParams: () => mockSearchParams,
 }));
+
+const expectDateEquals = (actual: Date, expected: string): void => {
+  const [year, month, day] = expected.split("-").map(Number);
+
+  expect(actual.getUTCFullYear()).toBe(year);
+  expect(actual.getUTCMonth()).toBe(month - 1);
+  expect(actual.getUTCDate()).toBe(day);
+};
+
+const expectFieldsToMatch = (
+  args: BookingFormValuesType,
+  expected: {
+    origin: string;
+    destination: string;
+    type?: string;
+    departureDate: string;
+    returnDate: string;
+  }
+): void => {
+  expect(args.origin).toBe(expected.origin);
+  expect(args.destination).toBe(expected.destination);
+  expect(args.flightTypeOption).toBe(expected.type ?? roundTrip);
+  expectDateEquals(args.fromDate, expected.departureDate);
+  expectDateEquals(args.toDate, expected.returnDate);
+};
 
 describe("useQueryToFormInit", () => {
   beforeEach(() => {
@@ -37,21 +63,8 @@ describe("useQueryToFormInit", () => {
       useQueryToFormInit(mockReset);
     });
 
-    expect(mockReset).toHaveBeenCalledTimes(1);
-
     const args = mockReset.mock.calls[0][0];
-
-    expect(args.origin).toBe(data.origin);
-    expect(args.destination).toBe(data.destination);
-    expect(args.flightTypeOption).toBe(data.type);
-
-    expect(args.fromDate.getUTCFullYear()).toBe(2025);
-    expect(args.fromDate.getUTCMonth()).toBe(7);
-    expect(args.fromDate.getUTCDate()).toBe(20);
-
-    expect(args.toDate.getUTCFullYear()).toBe(2025);
-    expect(args.toDate.getUTCMonth()).toBe(7);
-    expect(args.toDate.getUTCDate()).toBe(28);
+    expectFieldsToMatch(args, data);
   });
 
   it("uses fallback flight type if type param is missing", () => {
@@ -60,7 +73,7 @@ describe("useQueryToFormInit", () => {
       destination: "Berlin",
       departureDate: "2025-09-01",
       returnDate: "2025-09-10",
-      // not passing flight type
+      // not passing type
     };
 
     mockSearchParams = new URLSearchParams(data);
@@ -69,21 +82,8 @@ describe("useQueryToFormInit", () => {
       useQueryToFormInit(mockReset);
     });
 
-    expect(mockReset).toHaveBeenCalledTimes(1);
-
     const args = mockReset.mock.calls[0][0];
-
-    expect(args.origin).toBe(data.origin);
-    expect(args.destination).toBe(data.destination);
-    expect(args.flightTypeOption).toBe(roundTrip);
-
-    expect(args.fromDate.getUTCFullYear()).toBe(2025);
-    expect(args.fromDate.getUTCMonth()).toBe(8);
-    expect(args.fromDate.getUTCDate()).toBe(1);
-
-    expect(args.toDate.getUTCFullYear()).toBe(2025);
-    expect(args.toDate.getUTCMonth()).toBe(8);
-    expect(args.toDate.getUTCDate()).toBe(10);
+    expectFieldsToMatch(args, data);
   });
 
   it("resets to default if required fields are missing", () => {

@@ -121,10 +121,13 @@ yarn dev
   `yarn test:e2e`
 
 - **Run Playwright in UI mode**  
-  `yarn playwright --ui`
+  `yarn test:e2e --ui`
 
 - **Run a specific E2E test file**  
   `npx playwright test src/components/home/AirlineForm/AirlineForm.spec.tsx`
+
+- **Run a specific E2E in UI mode**  
+  `npx playwright test src/components/home/AirlineForm/AirlineForm.spec.tsx  --ui`
 
 ⚠️ Make sure the dev server is running (`yarn dev`) before launching E2E tests.
 

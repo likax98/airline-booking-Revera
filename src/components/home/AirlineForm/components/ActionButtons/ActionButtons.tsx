@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 import { Button } from "@/components/ui/button";
 import { LABELS } from "@/components/home/AirlineForm/lib";
 

@@ -2,20 +2,20 @@ import { render, RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
 
+import { formatLabeledText } from "@/lib/utils/strings";
 import {
   DATE_FIELDS_CONFIG,
   type DateFieldLabelType,
   type BookingFormValuesType,
 } from "@/components/home/AirlineForm/lib";
-import { getDateAriaLabel } from "@/components/home/AirlineForm/lib/utils";
+import { getDateAriaLabel } from "@/components/home/AirlineForm/lib/helpers";
 import {
   FlightDateFieldContext,
   type ContextValue,
 } from "@/components/home/AirlineForm/context";
 import { mockCities } from "@/components/home/AirlineForm/__mocks___";
-import { formatLabeledText } from "@/lib/utils/strings";
 
-import { Select } from "./Select";
+import { DateSelectButton } from "./DateSelectButton";
 
 const [field] = DATE_FIELDS_CONFIG;
 const { label } = field;
@@ -44,7 +44,7 @@ const FormWrapper = ({
 
   return (
     <FlightDateFieldContext.Provider value={contextValue}>
-      <Select {...{ label, value, control }} />
+      <DateSelectButton {...{ label, value, control }} />
     </FlightDateFieldContext.Provider>
   );
 };
@@ -54,7 +54,7 @@ const renderComponent = (props?: {
   value?: Date;
 }): RenderResult => render(<FormWrapper {...props} />);
 
-describe("Flight Date Select", () => {
+describe("FlightDateFields > DateSelectButton", () => {
   let user: ReturnType<typeof userEvent.setup>;
 
   beforeEach(() => {
@@ -108,9 +108,9 @@ describe("Flight Date Select", () => {
   it("calls 'setActiveDateField' with undefined when field is already active", async () => {
     const { getByRole } = renderComponent({ activeDateField: label });
 
-    const dateButton = getByRole("button");
+    const button = getByRole("button");
 
-    await user.click(dateButton);
+    await user.click(button);
 
     expect(mockSetActiveDateField).toHaveBeenCalledTimes(1);
   });

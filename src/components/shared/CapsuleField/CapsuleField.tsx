@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 import { Label } from "@/components/ui/label";
 import { getErrorStyles } from "@/lib/utils/errors";
 

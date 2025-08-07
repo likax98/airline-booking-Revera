@@ -14,7 +14,7 @@ export default {
     layout: "centered",
     docs: {
       description: {
-        component: "A radio field for selecting flight type",
+        component: "A radio button form field for selecting flight type",
       },
     },
   },

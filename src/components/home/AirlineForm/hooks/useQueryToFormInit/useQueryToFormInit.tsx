@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { UseFormReset } from "react-hook-form";
 
-import { getQueryParamsObject } from "@/lib/utils/url";
+import { getQueryParamsObject } from "@/lib/utils/urls";
 import { parseDateFromQuery } from "@/lib/utils/dates";
 import {
   type BookingFormValuesType,

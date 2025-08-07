@@ -19,7 +19,7 @@ export const MESSAGES = {
   BOOKING_CONFIRMED: "Booking confirmed",
   BOOKING_FAILED: "Booking failed",
   SELECT_ORIGIN_AND_DESTINATION: "Select origin and destination first",
-  SELECT_DATE_FIELD: "Please select From or To date field",
+  SELECT_DATE_FIELD: "Select From or To date field",
 };
 
 // Error Messages

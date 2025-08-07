@@ -1,16 +1,16 @@
 "use client";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 import { formatDate, isValidDate } from "@/lib/utils/dates";
 import { formatLabeledText } from "@/lib/utils/strings";
 import { getErrorStyles } from "@/lib/utils/errors";
 import { Button } from "@/components/ui/button";
 import { CapsuleField } from "@/components/shared/CapsuleField";
-import { getDateAriaLabel } from "@/components/home/AirlineForm/lib/utils";
+import { getDateAriaLabel } from "@/components/home/AirlineForm/lib/helpers";
 import { useFlightDateField } from "@/components/home/AirlineForm/context";
 import type { DateFieldLabelType } from "@/components/home/AirlineForm/lib";
 
-export interface SelectProps {
+export interface DateSelectButtonProps {
   label: DateFieldLabelType;
   value?: Date;
   hasError?: boolean;
@@ -18,11 +18,11 @@ export interface SelectProps {
 
 // Capsule-style date selector button component for return and departure dates
 // Toggles a calendar based on active field state
-export const Select = ({
+export const DateSelectButton = ({
   label,
   value,
   hasError = false,
-}: SelectProps): JSX.Element => {
+}: DateSelectButtonProps): JSX.Element => {
   const { activeDateField, setActiveDateField } = useFlightDateField();
 
   const isActiveDataField = activeDateField === label;

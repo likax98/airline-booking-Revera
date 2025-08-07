@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 import type { FlightDestination } from "@/types";
 import { Form as FormProvider } from "@/components/ui/form";
 import { Bounded } from "@/components/shared";
@@ -28,7 +28,7 @@ import {
   useQueryToFormInit,
 } from "./hooks";
 import { FlightDateFieldProvider } from "./context";
-import { getDefaultValuesFromSearchParams } from "./lib/utils";
+import { getDefaultValuesFromSearchParams } from "./lib/helpers";
 import { submitBooking } from "./lib/api";
 
 interface Props {
@@ -73,15 +73,10 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
 
   return (
     <FlightDateFieldProvider>
-      <div
-        className={cn(
-          "flex min-h-screen flex-col items-center justify-center",
-          "px-4 py-10",
-          "sm:px-6 lg:flex-row"
-        )}>
+      <div className="flex min-h-screen flex-col items-center justify-center p-4 lg:flex-row">
         <div
           className={cn(
-            "flex gap-20 px-6 sm:p-10 lg:p-12 xl:gap-26 xl:p-20",
+            "flex gap-20 px-6 sm:p-10 lg:p-12 xl:p-20",
             "border border-gray-200 rounded-2xl bg-white shadow-lg"
           )}>
           <FormProvider {...form}>

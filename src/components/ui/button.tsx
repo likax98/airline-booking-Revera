@@ -4,7 +4,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 ring-offset-background disabled:opacity-50 disabled:pointer-events-none",
@@ -21,7 +21,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "underline-offset-4 hover:underline text-primary",
         calendarClose:
-          "absolute right-4 top-4 z-10 hidden lg:block p-0 text-xl text-gray-400 bg-white shadow-none hover:bg-transparent hover:text-gray-700",
+          "absolute right-4 top-4 z-10 hidden !p-0 text-xl text-gray-400 bg-white shadow-none hover:bg-transparent hover:text-gray-700 lg:block",
         capsuleDate: cn(
           "w-full lg:w-60",
           "px-6 py-4",
@@ -31,8 +31,10 @@ const buttonVariants = cva(
           "transition-colors duration-300",
           "hover:border-black hover:text-black hover:bg-white"
         ),
-        reset: "text-gray-600 bg-white border-gray-600 shadow-lg text-lg font-light rounded-full",
-        submit: "bg-blue-600 text-white rounded-full text-lg font-light hover:bg-blue-700",
+        reset:
+          "text-gray-600 bg-white border-gray-600 shadow-lg text-lg font-light rounded-full",
+        submit:
+          "bg-blue-600 text-white rounded-full text-lg font-light hover:bg-blue-700",
       },
       size: {
         default: "h-10 px-4 py-2",

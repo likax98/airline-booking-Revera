@@ -14,9 +14,9 @@ import {
   type BookingFormValuesType,
   RouteFieldName,
 } from "@/components/home/AirlineForm/lib";
-import { getRoutesConfig } from "@/components/home/AirlineForm/lib/utils";
+import { getRoutesConfig } from "@/components/home/AirlineForm/lib/helpers";
 
-/** A origin and destination fields wrapper in the flight booking form */
+// A origin and destination fields wrapper in the flight booking form
 export const RouteFields = ({
   control,
   cities,
@@ -32,7 +32,7 @@ export const RouteFields = ({
   const config = getRoutesConfig({ cities, origin, destination });
 
   return (
-    <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12">
+    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-12">
       {config.map(({ label, ...selectProps }) => (
         <FormField
           key={label}
@@ -46,7 +46,7 @@ export const RouteFields = ({
                   {...selectProps}
                 />
               </FormControl>
-              <div className="min-h-[1.25rem]">
+              <div className="min-h-1 md:min-h-[1.25rem]">
                 <FormMessage />
               </div>
             </FormItem>

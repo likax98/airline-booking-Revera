@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 
 import { formatLabeledText } from "@/lib/utils/strings";
 import type { BookingFormValuesType } from "@/components/home/AirlineForm/lib";
-import { getRoutesConfig } from "@/components/home/AirlineForm/lib/utils";
+import { getRoutesConfig } from "@/components/home/AirlineForm/lib/helpers";
 import { mockCities } from "@/components/home/AirlineForm/__mocks___";
 
 import { RouteFields } from "./RouteFields";

@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 import {
   Select,
   SelectContent,

@@ -14,7 +14,7 @@ interface Props {
   control: Control<BookingFormValuesType>;
 }
 
-// A radio field for selecting flight type
+// A radio button form field for selecting flight type
 export const FlightTypeOptionField = ({ control }: Props): JSX.Element => (
   <div className="flex flex-col mt-16 mb-11 sm:flex-row">
     <FormField

@@ -72,12 +72,24 @@ describe("ActionButtons", () => {
     expect(resetBtn).toHaveClass("opacity-0 invisible pointer-events-none");
   });
 
-  it(`disables submit button and shows '${LABELS.BOOKING_FLIGHT}' when submitting`, () => {
+  it(`disables submit button and shows '${LABELS.BOOKING_FLIGHT}' when submitting`, async () => {
+    const user = userEvent.setup();
+
     const { getByRole } = renderComponent({ isSubmitting: true });
 
     const submitBtn = getByRole("button", { name: LABELS.BOOKING_FLIGHT });
 
+    await user.click(submitBtn);
+
     expect(submitBtn).toBeDisabled();
     expect(submitBtn).toHaveTextContent(LABELS.BOOKING_FLIGHT);
+  });
+
+  it("does not disable submit button when form is invalid", () => {
+    const { getByRole } = renderComponent({ isValid: false });
+
+    const submitBtn = getByRole("button", { name: LABELS.BOOK_FLIGHT });
+
+    expect(submitBtn).not.toBeDisabled();
   });
 });

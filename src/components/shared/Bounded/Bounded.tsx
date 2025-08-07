@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 
 import { TEST_IDS } from "../lib/constants";
 

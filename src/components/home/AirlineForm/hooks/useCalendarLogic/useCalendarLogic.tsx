@@ -10,7 +10,7 @@ import {
 import {
   getDisabledFlightDates,
   setSelectedFlightDate,
-} from "@/components/home/AirlineForm/lib/utils";
+} from "@/components/home/AirlineForm/lib/helpers";
 import { useFlightDateField } from "@/components/home/AirlineForm/context";
 
 const [fromDateConfig, toDateConfig] = DATE_FIELDS_CONFIG;
@@ -52,10 +52,17 @@ export const useCalendarLogic = ({
     );
   }, [activeDateField, destinations, destination, fromDate, isToFieldActive]);
 
+  const setDateField = (
+    fieldName: keyof BookingFormValuesType,
+    date: Date
+  ): void => {
+    setValue(fieldName, date, { shouldValidate: true });
+  };
+
   const handleDateSelect = (date?: Date): void => {
     setSelectedFlightDate(
-      (d) => setValue(fromDateConfig.name, d, { shouldValidate: true }),
-      (d) => setValue(toDateConfig.name, d, { shouldValidate: true }),
+      (date) => setDateField(fromDateConfig.name, date),
+      (date) => setDateField(toDateConfig.name, date),
       date,
       activeDateField
     );
@@ -64,8 +71,8 @@ export const useCalendarLogic = ({
 
   return {
     origin,
-    selectedDate,
     destination,
+    selectedDate,
     activeDateField,
     disabledDates,
     setActiveDateField,

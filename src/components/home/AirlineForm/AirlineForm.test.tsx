@@ -54,9 +54,9 @@ describe("AirlineForm", () => {
       expect(getByText(label)).toBeInTheDocument();
     });
 
-    expect(
-      getByRole("button", { name: LABELS.BOOK_FLIGHT })
-    ).toBeInTheDocument();
+    const submitBtn = getByRole("button", { name: LABELS.BOOK_FLIGHT });
+
+    expect(submitBtn).toBeInTheDocument();
   });
 });
 

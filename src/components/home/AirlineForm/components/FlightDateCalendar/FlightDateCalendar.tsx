@@ -2,7 +2,7 @@
 
 import { Control, UseFormSetValue } from "react-hook-form";
 
-import { cn } from "@/lib/utils/className";
+import { cn } from "@/lib/utils/classnames";
 import type { FlightDestination } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -11,7 +11,7 @@ import {
   BookingFormValuesType,
   TEST_IDS,
 } from "@/components/home/AirlineForm/lib";
-import { getCalendarWarningMessage } from "@/components/home/AirlineForm/lib/utils";
+import { getCalendarWarningMessage } from "@/components/home/AirlineForm/lib/helpers";
 import { useCalendarLogic } from "@/components/home/AirlineForm/hooks";
 
 export interface FlightDateCalendarProps {
@@ -60,9 +60,7 @@ export const FlightDateCalendar = ({
       data-testid={TEST_IDS.FLIGHT_DATE_CALENDAR_WRAPPER}>
       <div className="w-full rounded-2xl bg-white p-6 shadow-lg">
         <Button
-          variant="ghost"
-          size="icon"
-          className="absolute right-4 top-4 z-10 hidden text-xl text-gray-400 hover:text-gray-700 lg:block"
+          variant="calendarClose"
           aria-label={ARIA_LABELS.CLOSE_CALENDAR}
           onClick={() => setActiveDateField(undefined)}>
           ×

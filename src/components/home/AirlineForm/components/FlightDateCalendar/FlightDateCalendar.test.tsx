@@ -68,7 +68,7 @@ const renderComponent = (props?: Partial<TestComponentProps>): RenderResult =>
 describe("FlightDateCalendar", () => {
   let user: ReturnType<typeof userEvent.setup>;
 
-  beforeEach(() => {
+  beforeAll(() => {
     user = userEvent.setup();
     mockSetActiveDateField.mockClear();
   });
