@@ -65,6 +65,19 @@ export const isBefore = (date: Date, compareDate: Date): boolean =>
   date.getTime() < compareDate.getTime();
 
 /**
+ * Checks if two dates fall on the same calendar day
+ * 
+ * @param date - The first date to compare
+ * @param compareDate - The second date to compare
+ * 
+ * @returns `true` if both dates are on the same calendar day, otherwise "false"
+ */
+export const isSameDay = (date: Date, compareDate: Date): boolean =>
+  date.getFullYear() === compareDate.getFullYear() &&
+  date.getMonth() === compareDate.getMonth() &&
+  date.getDate() === compareDate.getDate();
+
+/**
  * Converts a Date object into a local ISO 8601 date string "YYYY-MM-DD"
  *
  * @param {Date | undefined} date - The date to convert

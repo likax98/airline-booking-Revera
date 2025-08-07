@@ -18,11 +18,9 @@ const queryParamKeys = [
   "type",
 ];
 
-/**
- * Syncs form state from URL query parameters on load or when URL changes.
- * Resets form to blank if no valid query is present.
- */
-export const useHydrateFormFromUrl = (
+// Syncs form state from URL query parameters on load or when URL changes.
+// Resets form to blank if no valid query is present
+export const useQueryToFormInit = (
   reset: UseFormReset<BookingFormValuesType>
 ): void => {
   const searchParams = useSearchParams();

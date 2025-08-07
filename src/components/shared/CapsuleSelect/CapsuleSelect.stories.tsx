@@ -12,8 +12,7 @@ export default {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "CapsuleSelect component is a rounded dropdown select. It supports dynamic options, custom styling, and displays a placeholder when no selection is made.",
+        component: "A capsule-shaped dropdown select with dynamic options",
       },
     },
   },
@@ -26,8 +25,8 @@ export const Default = () => {
     <div className="w-80">
       <CapsuleSelect
         label="Default"
-        onChange={setValue}
         options={mockOptions}
+        onChange={setValue}
         {...{ value }}
       />
     </div>
@@ -41,8 +40,8 @@ export const Preselected = () => {
     <div className="w-80">
       <CapsuleSelect
         label="Preselected"
-        onChange={setValue}
         options={mockOptions}
+        onChange={setValue}
         {...{ value }}
       />
     </div>

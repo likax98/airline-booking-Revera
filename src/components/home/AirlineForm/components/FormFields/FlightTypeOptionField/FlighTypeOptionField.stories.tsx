@@ -15,7 +15,7 @@ export default {
     docs: {
       description: {
         component:
-          "FlightTypeOptionField radio buttons lets users choose between 'One Way' or 'Round Trp' options",
+          "A radio field for selecting flight type",
       },
     },
   },

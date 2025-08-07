@@ -18,7 +18,7 @@ export default {
     docs: {
       description: {
         component:
-          "RouteFields component renders the origin and destination input fields used in the flight booking form.",
+          "A origin and destination fields wrapper in the flight booking form",
       },
     },
   },

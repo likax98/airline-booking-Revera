@@ -15,7 +15,7 @@ export default {
     docs: {
       description: {
         component:
-          "FlightDateFields component renders the 'From' and 'To' date selection fields in the flight booking form. It handles user interaction.",
+          "A wrapper for the return date and the departure date selection fields in the booking form",
       },
     },
   },
@@ -28,7 +28,7 @@ export const Default = () => {
 
   return (
     <FormProvider {...form}>
-      <FlightDateFields control={form.control} />
+      <FlightDateFields />
     </FormProvider>
   );
 };

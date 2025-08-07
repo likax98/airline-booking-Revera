@@ -8,7 +8,7 @@ import {
   type BookingFormValuesType,
 } from "@/components/home/AirlineForm/lib";
 
-import { useSyncFormQuery } from "./useSyncFormQuery";
+import { useFormToQuerySync } from "./useFormToQuerySync";
 
 const [roundTrip] = FLIGHT_OPTIONS;
 const sharedProps = {
@@ -25,7 +25,7 @@ jest.mock("next/navigation", () => ({
   }),
 }));
 
-describe("useSyncFormQuery", () => {
+describe("useFormToQuerySync", () => {
   beforeEach(() => {
     mockPush.mockClear();
   });
@@ -36,7 +36,7 @@ describe("useSyncFormQuery", () => {
         defaultValues,
       });
 
-      useSyncFormQuery(methods.control);
+      useFormToQuerySync(methods.control);
 
       return methods;
     });
@@ -62,7 +62,7 @@ describe("useSyncFormQuery", () => {
     });
 
     expect(mockPush).toHaveBeenCalledTimes(1);
-    expect(mockPush).toHaveBeenCalledWith(query, { scroll: false });
+    expect(mockPush).toHaveBeenCalledWith(query);
   });
 
   it("does not push URL if values are unchanged", () => {

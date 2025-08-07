@@ -1,25 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
-import { Control, UseFormSetValue, useWatch } from "react-hook-form";
+import { Control, UseFormSetValue } from "react-hook-form";
 
 import { cn } from "@/lib/utils/className";
 import type { FlightDestination } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { useFlightDateField } from "@/components/home/AirlineForm/context";
 import {
   ARIA_LABELS,
-  DATE_FIELDS_CONFIG,
-  FormFields,
+  BookingFormValuesType,
   TEST_IDS,
-  type BookingFormValuesType,
 } from "@/components/home/AirlineForm/lib";
-import {
-  setSelectedFlightDate,
-  getDisabledFlightDates,
-  getCalendarWarningMessage,
-} from "@/components/home/AirlineForm/lib/utils";
+import { getCalendarWarningMessage } from "@/components/home/AirlineForm/lib/utils";
+import { useCalendarLogic } from "@/components/home/AirlineForm/hooks";
 
 export interface FlightDateCalendarProps {
   className?: string;
@@ -28,95 +21,67 @@ export interface FlightDateCalendarProps {
   setValue: UseFormSetValue<BookingFormValuesType>;
 }
 
-const [fromDateConfig, toDateConfig] = DATE_FIELDS_CONFIG;
-const fromFieldName = fromDateConfig.name;
-const toFieldName = toDateConfig.name;
-
+// A calendar for selecting flight departure and return dates
 export const FlightDateCalendar = ({
   className,
   destinations,
   control,
   setValue,
 }: FlightDateCalendarProps) => {
-  const { activeDateField, setActiveDateField } = useFlightDateField();
+  const {
+    selectedDate,
+    disabledDates,
+    activeDateField,
+    setActiveDateField,
+    origin,
+    destination,
+    handleDateSelect,
+  } = useCalendarLogic({ control, destinations, setValue });
 
-  const [fromDate, toDate, origin, destination] = useWatch({
-    control,
-    name: [FormFields.FromDate, FormFields.ToDate, FormFields.Origin, FormFields.Destination],
+  const isVisible = !!activeDateField;
+
+  const calendarVisibilityClasses = isVisible
+    ? "lg:pointer-events-auto lg:opacity-100 lg:visible"
+    : "lg:pointer-events-none lg:opacity-0 lg:invisible";
+
+  const warningMessage = getCalendarWarningMessage({
+    origin,
+    destination,
+    activeDateField,
   });
-
-  const isToFieldActive = activeDateField === toDateConfig.label;
-  const selectedFlightDate = isToFieldActive ? toDate : fromDate;
-
-  const disabledFlightDates = useMemo(() => {
-    // Mainly for mobile devices
-    if (!activeDateField) {
-      return () => true;
-    }
-
-    return getDisabledFlightDates(
-      destinations,
-      destination,
-      isToFieldActive ? fromDate : undefined
-    );
-  }, [activeDateField, destinations, destination, fromDate, isToFieldActive]);
-
-  const handleSelectDate = (date?: Date): void => {
-    setSelectedFlightDate(
-      (d) => setValue(fromFieldName, d, { shouldValidate: true }),
-      (d) => setValue(toFieldName, d, { shouldValidate: true }),
-      date,
-      activeDateField
-    );
-    setActiveDateField(undefined);
-  };
-
-  const closeButton = (
-    <Button
-      className={cn(
-        "absolute right-4 top-4 z-10",
-        "hidden lg:block",
-        "p-0",
-        "text-xl text-gray-400",
-        "bg-white shadow-none",
-        "hover:bg-transparent hover:text-gray-700"
-      )}
-      type="button"
-      aria-label={ARIA_LABELS.CLOSE_CALENDAR}
-      onClick={() => setActiveDateField(undefined)}>
-      ×
-    </Button>
-  );
-
-  const warningMessage = (
-    <p
-      className="mt-6 text-center text-sm text-yellow-500"
-      role="alert">
-      {getCalendarWarningMessage({ origin, destination, activeDateField })}
-    </p>
-  );
 
   return (
     <div
       className={cn(
-        "relative flex",
-        "transition-opacity duration-500 ease-in-out",
-        "lg:opacity-0 lg:invisible lg:pointer-events-none",
-        activeDateField && "lg:opacity-100 lg:visible lg:pointer-events-auto",
+        "relative flex transition-opacity duration-500 ease-in-out",
+        calendarVisibilityClasses,
         className
       )}
       data-testid={TEST_IDS.FLIGHT_DATE_CALENDAR_WRAPPER}>
       <div className="w-full rounded-2xl bg-white p-6 shadow-lg">
-        {closeButton}
-        {warningMessage}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 top-4 z-10 hidden text-xl text-gray-400 hover:text-gray-700 lg:block"
+          aria-label={ARIA_LABELS.CLOSE_CALENDAR}
+          onClick={() => setActiveDateField(undefined)}>
+          ×
+        </Button>
+
+        {warningMessage && (
+          <p className="mt-6 text-center text-sm text-yellow-500" role="alert">
+            {warningMessage}
+          </p>
+        )}
+
         <Calendar
           fixedWeeks
           mode="single"
           captionLayout="dropdown"
           data-testid={TEST_IDS.FLIGHT_DATE_CALENDAR}
-          selected={selectedFlightDate}
-          disabled={disabledFlightDates}
-          onSelect={handleSelectDate}
+          selected={selectedDate ?? undefined}
+          disabled={disabledDates}
+          onSelect={handleDateSelect}
         />
       </div>
     </div>

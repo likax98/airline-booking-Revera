@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "Bounded component is a layout container that adds consistent horizontal padding and centers content with a max width. It renders as a '<section>' by default but supports a custom HTML tag via the 'as' prop.",
+          "A layout container that adds consistent horizontal padding and centers content with a max width",
       },
     },
   },

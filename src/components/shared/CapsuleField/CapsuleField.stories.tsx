@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "CapsuleField component is a styled field container with a floating label and children.",
+          "Floating label wrapper for form controls with consistent error styling",
       },
     },
   },

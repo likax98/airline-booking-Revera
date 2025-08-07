@@ -12,9 +12,7 @@ interface Props {
   isSubmitting?: boolean;
 }
 
-const baseClasses =
-  "w-full h-12 lg:w-32 px-7 py-4 text-lg font-light rounded-full";
-
+// A styled button group for submitting or resetting the flight booking form
 export const ActionButtons = ({ isSubmitting }: Props): JSX.Element => {
   const router = useRouter();
   const { reset, formState } = useFormContext();
@@ -28,22 +26,18 @@ export const ActionButtons = ({ isSubmitting }: Props): JSX.Element => {
   return (
     <div className="flex flex-col items-center gap-6 sm:gap-8 lg:flex-row">
       <Button
-        className={cn(baseClasses, "text-white bg-blue-600 hover:bg-blue-700")}
         type="submit"
+        variant="submit"
+        size="form"
         disabled={isSubmitting}>
         {isSubmitting ? LABELS.BOOKING_FLIGHT : LABELS.BOOK_FLIGHT}
       </Button>
       <Button
-        className={cn(
-          baseClasses,
-          "text-gray-600 bg-white border-gray-600",
-          "shadow-lg",
-          "hover:border-gray-700 hover:bg-gray-100",
-          "transition-all duration-300",
-          !isValid && "opacity-0 invisible pointer-events-none"
-        )}
         type="button"
-        onClick={handleReset}>
+        variant="reset"
+        size="form"
+        onClick={handleReset}
+        className={cn(!isValid && "opacity-0 invisible pointer-events-none")}>
         {LABELS.RESET}
       </Button>
     </div>

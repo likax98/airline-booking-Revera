@@ -11,17 +11,19 @@ import {
 import { CapsuleSelect } from "@/components/shared";
 import {
   FormFields,
-  type RouteFieldLabelType,
   type BookingFormValuesType,
+  RouteFieldName,
 } from "@/components/home/AirlineForm/lib";
 import { getRoutesConfig } from "@/components/home/AirlineForm/lib/utils";
 
-interface Props {
+/** A origin and destination fields wrapper in the flight booking form */
+export const RouteFields = ({
+  control,
+  cities,
+}: {
   control: Control<BookingFormValuesType>;
   cities: string[];
-}
-
-export const RouteFields = ({ control, cities }: Props): JSX.Element => {
+}): JSX.Element => {
   const [origin, destination] = useWatch({
     control,
     name: [FormFields.Origin, FormFields.Destination],
@@ -34,7 +36,7 @@ export const RouteFields = ({ control, cities }: Props): JSX.Element => {
       {config.map(({ label, ...selectProps }) => (
         <FormField
           key={label}
-          name={label.toLowerCase() as RouteFieldLabelType}
+          name={label.toLowerCase() as RouteFieldName}
           render={({ field: { value, onChange }, fieldState }) => (
             <FormItem>
               <FormControl>
@@ -44,7 +46,6 @@ export const RouteFields = ({ control, cities }: Props): JSX.Element => {
                   {...selectProps}
                 />
               </FormControl>
-              {/*To avoid layout jumping */}
               <div className="min-h-[1.25rem]">
                 <FormMessage />
               </div>

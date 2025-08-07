@@ -1,4 +1,6 @@
-import { DateFieldConfigType } from "./types";
+import { BookingFormValuesType, DateFieldConfigType } from "./types";
+
+export const FLIGHT_OPTIONS = ["round-trip", "one-way"];
 
 // Labels
 export const LABELS = {
@@ -18,7 +20,15 @@ export const MESSAGES = {
   BOOKING_FAILED: "Booking failed",
   SELECT_ORIGIN_AND_DESTINATION: "Select origin and destination first",
   SELECT_DATE_FIELD: "Please select From or To date field",
-  GENERIC_ERROR: "Something went wrong"
+};
+
+// Error Messages
+export const ERROR_MESSAGES = {
+  ORIGIN_REQUIRED: "Origin city is required",
+  DESTINATION_REQUIRED: "Destination city is required",
+  FROM_DATE_REQUIRED: "Departure date is required",
+  TO_DATE_REQUIRED: "Return date is required",
+  GENERIC_ERROR: "Something went wrong",
 };
 
 // TestIds
@@ -54,9 +64,7 @@ export const DATE_FIELDS_CONFIG: DateFieldConfigType[] = [
   },
 ];
 
-export const FLIGHT_OPTIONS = ["round-trip", "one-way"];
-
-export const DEFAULT_BOOKING_FORM_VALUES = {
+export const DEFAULT_BOOKING_FORM_VALUES: Partial<BookingFormValuesType> = {
   origin: "",
   destination: "",
   fromDate: undefined,

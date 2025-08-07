@@ -9,6 +9,7 @@ interface Props {
   setValue: UseFormSetValue<BookingFormValuesType>;
 }
 
+// It automatically updates the return date to match the departure date if the return date is earlier.
 export const useFlightDateSync = ({ control, setValue }: Props): void => {
   const [fromDate, toDate] = useWatch({
     control,

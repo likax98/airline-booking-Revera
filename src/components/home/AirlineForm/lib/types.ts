@@ -1,4 +1,13 @@
-import { FLIGHT_OPTIONS, FormFieldLabel, FormFields } from "./constants";
+import { z } from "zod";
+
+import { FormFields, FormFieldLabel, FLIGHT_OPTIONS } from "../lib/constants";
+import { createBookingFormSchema } from "./schema";
+
+export type BookingFormSchemaType = z.infer<
+  ReturnType<typeof createBookingFormSchema>
+>;
+
+export type RouteFieldName = "origin" | "destination";
 
 export type FlightOptionType = (typeof FLIGHT_OPTIONS)[number];
 
@@ -10,21 +19,18 @@ export type BookingFormValuesType = {
   toDate: Date;
 };
 
-export interface BookingResultType {
-  bookingId: string;
-  status: string;
-  timestamp: string;
-}
-
-export interface RouteFieldConfigType {
-  label: FormFieldLabel;
-  options: string[];
-}
-
-export type RouteFieldLabelType = FormFields.Origin | FormFields.Destination;
 export type DateFieldLabelType = FormFieldLabel.From | FormFieldLabel.To;
 
 export type DateFieldConfigType = {
   name: FormFields.FromDate | FormFields.ToDate;
   label: DateFieldLabelType;
+};
+
+export type RouteFieldLabelType =
+  | FormFieldLabel.Origin
+  | FormFieldLabel.Destination;
+
+export type RouteFieldConfigType = {
+  label: RouteFieldLabelType;
+  options: string[];
 };

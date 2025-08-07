@@ -31,7 +31,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(nunito.variable, nunitoSans.variable)}>
         {children}
-
         <Toaster />
       </body>
     </html>

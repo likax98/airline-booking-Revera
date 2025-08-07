@@ -5,7 +5,7 @@ import {
   FLIGHT_OPTIONS,
 } from "@/components/home/AirlineForm/lib";
 
-import { useHydrateFormFromUrl } from "./useHydrateFormFromUrl";
+import { useQueryToFormInit } from "./useQueryToFormInit";
 
 const [roundTrip] = FLIGHT_OPTIONS;
 
@@ -17,7 +17,7 @@ jest.mock("next/navigation", () => ({
   useSearchParams: () => mockSearchParams,
 }));
 
-describe("useHydrateFormFromUrl", () => {
+describe("useQueryToFormInit", () => {
   beforeEach(() => {
     mockReset.mockClear();
   });
@@ -34,7 +34,7 @@ describe("useHydrateFormFromUrl", () => {
     mockSearchParams = new URLSearchParams(data);
 
     renderHook(() => {
-      useHydrateFormFromUrl(mockReset);
+      useQueryToFormInit(mockReset);
     });
 
     expect(mockReset).toHaveBeenCalledTimes(1);
@@ -66,7 +66,7 @@ describe("useHydrateFormFromUrl", () => {
     mockSearchParams = new URLSearchParams(data);
 
     renderHook(() => {
-      useHydrateFormFromUrl(mockReset);
+      useQueryToFormInit(mockReset);
     });
 
     expect(mockReset).toHaveBeenCalledTimes(1);
@@ -90,7 +90,7 @@ describe("useHydrateFormFromUrl", () => {
     mockSearchParams = new URLSearchParams();
 
     renderHook(() => {
-      useHydrateFormFromUrl(mockReset);
+      useQueryToFormInit(mockReset);
     });
 
     expect(mockReset).toHaveBeenCalledTimes(1);

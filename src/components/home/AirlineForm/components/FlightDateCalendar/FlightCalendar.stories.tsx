@@ -15,8 +15,7 @@ export default {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "FlightDateCalendar component is a calendar for selecting flight dates.",
+        component: "A calendar for selecting flight departure and return dates",
       },
     },
   },

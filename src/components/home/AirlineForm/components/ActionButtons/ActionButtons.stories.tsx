@@ -13,7 +13,7 @@ export default {
     docs: {
       description: {
         component:
-          "ActionButtons component is a styled submit and reset buttons wrapper used to confirm and submit and reset the flight booking form",
+          "A styled button group for submitting or resetting the flight booking form",
       },
     },
   },

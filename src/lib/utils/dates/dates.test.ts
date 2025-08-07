@@ -3,6 +3,7 @@ import {
   dateToLocalISOString,
   formatDate,
   isBefore,
+  isSameDay,
   isValidDate,
   parseDateFromQuery,
   startOfToday,
@@ -126,6 +127,43 @@ describe("isBefore", () => {
     const compareDate = new Date(2025, 7, 7);
 
     expect(isBefore(date, compareDate)).toBe(false);
+  });
+});
+
+describe("isSameDay", () => {
+  it("returns true for identical dates", () => {
+    const date = new Date("2025-08-07T10:30:00");
+    const compareDate = new Date("2025-08-07T22:00:00"); // same day, different time
+
+    expect(isSameDay(date, compareDate)).toBe(true);
+  });
+
+  it("returns false for dates on different days", () => {
+    const date = new Date("2025-08-07T23:59:59");
+    const compareDate = new Date("2025-08-08T00:00:00");
+
+    expect(isSameDay(date, compareDate)).toBe(false);
+  });
+
+  it("returns false for dates in same month and day but different years", () => {
+    const date = new Date("2025-08-07");
+    const compareDate = new Date("2024-08-07");
+
+    expect(isSameDay(date, compareDate)).toBe(false);
+  });
+
+  it("returns false for dates in same year and day but different months", () => {
+    const date = new Date("2025-08-07");
+    const compareDate = new Date("2025-07-07");
+
+    expect(isSameDay(date, compareDate)).toBe(false);
+  });
+
+  it("returns false if one date is invalid", () => {
+    const date = new Date("invalid-date");
+    const compareDate = new Date("2025-08-07");
+
+    expect(isSameDay(date, compareDate)).toBe(false);
   });
 });
 

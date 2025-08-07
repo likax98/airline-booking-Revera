@@ -17,11 +17,15 @@ import {
   RouteFields,
   FlightDateFields,
 } from "./components";
-import { type BookingFormValuesType, createBookingFormSchema } from "./lib";
 import {
-  useSyncFormQuery,
+  type BookingFormSchemaType,
+  type BookingFormValuesType,
+  createBookingFormSchema,
+} from "./lib";
+import {
+  useFormToQuerySync,
   useFlightDateSync,
-  useHydrateFormFromUrl,
+  useQueryToFormInit,
 } from "./hooks";
 import { FlightDateFieldProvider } from "./context";
 import { getDefaultValuesFromSearchParams } from "./lib/utils";
@@ -31,6 +35,7 @@ interface Props {
   destinations: FlightDestination[];
 }
 
+/** The full booking form with fields and calendar */
 export const AirlineForm = ({ destinations }: Props): JSX.Element => {
   const searchParams = useSearchParams();
   const cities = destinations.map(({ city }) => city);
@@ -42,7 +47,7 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
     [searchParams]
   );
 
-  const form = useForm<BookingFormValuesType>({
+  const form = useForm<BookingFormSchemaType>({
     resolver: zodResolver(schema),
     defaultValues,
   });
@@ -59,8 +64,8 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
     control,
     setValue,
   });
-  useSyncFormQuery(control);
-  useHydrateFormFromUrl(reset);
+  useFormToQuerySync(control);
+  useQueryToFormInit(reset);
 
   const onSubmit = (data: BookingFormValuesType): void => {
     void submitBooking(data);
@@ -87,7 +92,7 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
               <Bounded>
                 <div className="flex flex-col gap-y-10">
                   <RouteFields {...{ control, cities }} />
-                  <FlightDateFields {...{ control }} />
+                  <FlightDateFields />
                   <div className="block w-auto max-w-sm mx-auto lg:hidden">
                     <FlightDateCalendar
                       {...{ control, destinations, setValue }}

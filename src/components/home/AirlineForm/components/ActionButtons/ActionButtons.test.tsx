@@ -37,7 +37,7 @@ const renderComponent = ({
 };
 
 describe("ActionButtons", () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
@@ -57,6 +57,7 @@ describe("ActionButtons", () => {
     const { getByRole } = renderComponent();
 
     const resetBtn = getByRole("button", { name: LABELS.RESET });
+
     await user.click(resetBtn);
 
     expect(mockReset).toHaveBeenCalledTimes(1);

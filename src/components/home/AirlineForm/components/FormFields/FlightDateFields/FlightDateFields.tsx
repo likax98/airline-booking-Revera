@@ -1,25 +1,17 @@
 "use client";
 
-import type { Control } from "react-hook-form";
-
 import {
   FormField,
   FormItem,
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  DATE_FIELDS_CONFIG,
-  type BookingFormValuesType,
-} from "@/components/home/AirlineForm/lib";
+import { DATE_FIELDS_CONFIG } from "@/components/home/AirlineForm/lib";
 
 import { Select } from "./Select";
 
-interface Props {
-  control: Control<BookingFormValuesType>;
-}
-
-export const FlightDateFields = ({ control }: Props): JSX.Element => (
+// A wrapper for the return date and the departure date selection fields in the booking form
+export const FlightDateFields = (): JSX.Element => (
   <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-12">
     {DATE_FIELDS_CONFIG.map(({ name, label }) => (
       <FormField
@@ -27,12 +19,9 @@ export const FlightDateFields = ({ control }: Props): JSX.Element => (
         render={({ field: { value }, fieldState }) => (
           <FormItem>
             <FormControl>
-              <Select
-                hasError={!!fieldState.error}
-                {...{ name, value, label, control }}
-              />
+              <Select hasError={!!fieldState.error} {...{ label, value }} />
             </FormControl>
-            {/*To avoid layout jumping */}
+            {/*To avoid layout jumping if form error message shows*/}
             <div className="min-h-[1.25rem]">
               <FormMessage />
             </div>

@@ -8,8 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getErrorStyles } from "@/components/home/AirlineForm/lib/utils";
 import { formatLabeledText } from "@/lib/utils/strings";
+import { getErrorStyles } from "@/lib/utils/errors";
 
 import { CapsuleField } from "../CapsuleField";
 import { MESSAGES } from "../lib/constants";
@@ -22,7 +22,8 @@ export interface CapsuleSelectProps {
   onChange: (value: string) => void;
 }
 
-// Shadcn Select delays rendering for some time
+// A capsule-shaped dropdown select with dynamic options
+// Shadcn Select renders its placeholder and dropdown with a delay because it mounts via a portal after hydration
 export const CapsuleSelect = ({
   label,
   options = [],
@@ -30,9 +31,7 @@ export const CapsuleSelect = ({
   hasError = false,
   onChange,
 }: CapsuleSelectProps): JSX.Element => (
-  <CapsuleField
-    className={cn("transition-colors", hasError && "text-red-600")}
-    {...{ label }}>
+  <CapsuleField {...{ label, hasError }}>
     <Select onValueChange={onChange} {...{ value }}>
       <SelectTrigger
         className={cn(
@@ -42,10 +41,11 @@ export const CapsuleSelect = ({
           "border border-gray-400 rounded-full",
           "text-lg font-light text-center text-gray-500",
           "appearance-none outline-none [&>svg]:hidden",
+          "focus:ring-0 focus:outline-none focus:border-gray-400",
           "transition-colors duration-300",
           "hover:text-black hover:border-black",
-          "focus:text-black focus:border-black",
-          getErrorStyles(hasError)
+          "data-[placeholder]:hover:text-black",
+          getErrorStyles(hasError, ["text", "border", "placeholder"])
         )}>
         <SelectValue placeholder={formatLabeledText("Select", label)} />
       </SelectTrigger>

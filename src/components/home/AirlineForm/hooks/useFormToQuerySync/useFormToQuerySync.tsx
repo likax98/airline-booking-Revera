@@ -2,20 +2,28 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useWatch, Control } from "react-hook-form";
 
-import { FormFields, type BookingFormValuesType } from "@/components/home/AirlineForm/lib";
+import {
+  FormFields,
+  type BookingFormValuesType,
+} from "@/components/home/AirlineForm/lib";
 import { dateToLocalISOString, isValidDate } from "@/lib/utils/dates";
 
-/**
- * Syncs form values to the URL query string whenever they change
- * Avoids pushing duplicate URLs
- */
-export const useSyncFormQuery = (control: Control<BookingFormValuesType>): void => {
+// Syncs form values to the URL query string whenever they change
+export const useFormToQuerySync = (
+  control: Control<BookingFormValuesType>
+): void => {
   const router = useRouter();
   const lastUrl = useRef("");
 
   const [origin, destination, fromDate, toDate, flightTypeOption] = useWatch({
     control,
-    name: [FormFields.Origin, FormFields.Destination, FormFields.FromDate, FormFields.ToDate, FormFields.FlightTypeOption],
+    name: [
+      FormFields.Origin,
+      FormFields.Destination,
+      FormFields.FromDate,
+      FormFields.ToDate,
+      FormFields.FlightTypeOption,
+    ],
   });
 
   useEffect(() => {
@@ -34,9 +42,10 @@ export const useSyncFormQuery = (control: Control<BookingFormValuesType>): void 
     }
 
     const newUrl = `?${params.toString()}`;
+
     if (newUrl !== lastUrl.current) {
       lastUrl.current = newUrl;
-      router.push(newUrl, { scroll: false });
+      router.push(newUrl);
     }
   }, [origin, destination, fromDate, toDate, flightTypeOption, router]);
 };

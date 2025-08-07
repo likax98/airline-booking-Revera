@@ -8,6 +8,10 @@ import { mockCities } from "@/components/home/AirlineForm/__mocks___";
 
 import { RouteFields } from "./RouteFields";
 
+type TestWrapperProps = Partial<
+  Pick<BookingFormValuesType, "origin" | "destination">
+>;
+
 const [origin, destination] = mockCities;
 
 const config = getRoutesConfig({
@@ -20,9 +24,7 @@ const [originConfig, destinationConfig] = config;
 const TestWrapper = ({
   origin,
   destination,
-}: Partial<
-  Pick<BookingFormValuesType, "origin" | "destination">
->): JSX.Element => {
+}: TestWrapperProps): JSX.Element => {
   const form = useForm<BookingFormValuesType>();
 
   return (
@@ -36,9 +38,8 @@ const TestWrapper = ({
   );
 };
 
-const renderComponent = (
-  props?: Partial<Pick<BookingFormValuesType, "origin" | "destination">>
-): RenderResult => render(<TestWrapper {...props} />);
+const renderComponent = (props?: TestWrapperProps): RenderResult =>
+  render(<TestWrapper {...props} />);
 
 const openSelect = (view: RenderResult, label: string): HTMLElement => {
   const trigger = view.getByText(formatLabeledText("Select", label));
@@ -54,7 +55,7 @@ const selectCity = (view: RenderResult, city: string): void => {
 
 describe("LocationFields", () => {
   it("renders 'origin' and 'destination' field labels", () => {
-    const { getByText } = render(<TestWrapper {...{ destination }} />);
+    const { getByText } = renderComponent();
 
     config.forEach(({ label }) => {
       expect(getByText(label)).toBeInTheDocument();
@@ -63,6 +64,7 @@ describe("LocationFields", () => {
 
   it("renders correct 'origin' options (excludes 'destination')", () => {
     const view = renderComponent({ destination: destination });
+
     openSelect(view, originConfig.label);
 
     const expected = mockCities.filter((city) => city !== destination);

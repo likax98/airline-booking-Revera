@@ -1,13 +1,14 @@
-import { DAYS_OF_WEEK_INDEXES } from "@/lib/constants";
 import {
   addDays,
   startOfToday,
   isBefore,
   formatDate,
   parseDateFromQuery,
+  isSameDay,
 } from "@/lib/utils/dates";
-import type { FlightDestination } from "@/types";
 import { excludeItem } from "@/lib/utils/arrays";
+import { DAYS_OF_WEEK_INDEXES } from "@/lib/constants";
+import type { FlightDestination } from "@/types";
 
 import {
   DATE_FIELDS_CONFIG,
@@ -59,7 +60,6 @@ export const getDisabledFlightDates = (
   destination?: string,
   minDate?: Date
 ): ((date: Date) => boolean) => {
-  // If no city is selected, disable all dates
   if (!destination) {
     return () => true;
   }
@@ -68,9 +68,16 @@ export const getDisabledFlightDates = (
   const matched = destinations.find(({ city }) => city === destination);
   const allowedWeekdays = matched?.availableWeekdays ?? DAYS_OF_WEEK_INDEXES;
 
-  return (date: Date) =>
-    isBefore(date, minDate ?? today) ||
-    !allowedWeekdays.includes(date.getDay());
+  return (date: Date) => {
+    const effectiveMin = minDate ?? today;
+
+    const tooEarly =
+      isBefore(date, effectiveMin) && !isSameDay(date, effectiveMin);
+
+    const invalidWeekday = !allowedWeekdays.includes(date.getDay());
+
+    return tooEarly || invalidWeekday;
+  };
 };
 
 /**
@@ -142,21 +149,6 @@ export const getRoutesConfig = ({
     options: origin ? excludeItem(cities, origin) : [],
   },
 ];
-
-/**
- * Returns conditional CSS for error styling
- *
- * If "hasError" is true, it returns a string of CSS classes that apply red border and text color
- * If "hasError" is false, it returns an empty string
- *
- * @param hasError - A boolean indicating whether the field has a validation error
- *
- * @returns A string of Tailwind classes if there is an error, otherwise an empty string
- *
- * Note: Due to its pure and trivial logic, this function does not require unit tests
- **/
-export const getErrorStyles = (hasError: boolean): string =>
-  hasError ? "border-red-600 text-red-600 data-[placeholder]:text-red-600" : "";
 
 /**
  * Extracts default form values from a given URLSearchParams object

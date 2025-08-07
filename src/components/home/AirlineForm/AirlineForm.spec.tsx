@@ -2,7 +2,7 @@ import { test, expect, Page } from "@playwright/test";
 
 import { addDays, startOfToday, dateToLocalISOString } from "@/lib/utils/dates";
 
-import { LABELS, MESSAGES } from "./lib";
+import { ERROR_MESSAGES, LABELS, MESSAGES } from "./lib";
 
 const URL = "http://localhost:3000";
 
@@ -19,7 +19,7 @@ test("shows error toast when booking fails", async ({ page }) => {
     await route.fulfill({
       status: 500,
       contentType: "application/json",
-      body: JSON.stringify({ error: MESSAGES.GENERIC_ERROR }),
+      body: JSON.stringify({ error: ERROR_MESSAGES.GENERIC_ERROR }),
     });
   });
 

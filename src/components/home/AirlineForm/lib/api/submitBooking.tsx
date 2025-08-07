@@ -1,7 +1,7 @@
 import { toast } from "@/hooks/use-toast";
 
 import type { BookingFormValuesType } from "../types";
-import { MESSAGES } from "../constants";
+import { ERROR_MESSAGES, MESSAGES } from "../constants";
 
 /**
  * Submits a booking request to the API and triggers toast notifications
@@ -43,6 +43,7 @@ const showSuccessToast = (result: {
 }): void => {
   toast({
     title: MESSAGES.BOOKING_CONFIRMED,
+    className: "bg-green-600 text-white border-green-700",
     description: (
       <div className="space-y-1">
         <p className="text-md font-semibold">Status: {result.status}</p>
@@ -53,14 +54,13 @@ const showSuccessToast = (result: {
         </p>
       </div>
     ),
-    className: "bg-green-600 text-white border-green-700",
   });
 };
 
 const showErrorToast = (message: string): void => {
   toast({
     title: MESSAGES.BOOKING_FAILED,
-    description: message || MESSAGES.GENERIC_ERROR,
+    description: message || ERROR_MESSAGES.GENERIC_ERROR,
     variant: "destructive",
   });
 };

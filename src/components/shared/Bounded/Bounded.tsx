@@ -2,18 +2,19 @@ import { cn } from "@/lib/utils/className";
 
 import { TEST_IDS } from "../lib/constants";
 
-interface BoundedProps {
+interface Props {
   as?: React.ElementType;
   className?: string;
   children: React.ReactNode;
 }
 
+// A layout container that adds consistent horizontal padding and centers content with a max width
 export const Bounded = ({
   as: Comp = "section",
   className,
   children,
   ...props
-}: BoundedProps): JSX.Element => (
+}: Props): JSX.Element => (
   <Comp
     className={cn("px-4 py-10 md:px-6 md:py-14 lg:py-16", className)}
     data-testid={TEST_IDS.BOUNDED_WRAPPER}

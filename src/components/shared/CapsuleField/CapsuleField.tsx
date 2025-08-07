@@ -1,26 +1,50 @@
+"use client";
+
+import { ReactNode } from "react";
+
 import { cn } from "@/lib/utils/className";
 import { Label } from "@/components/ui/label";
+import { getErrorStyles } from "@/lib/utils/errors";
 
-interface Props {
-  className?: string;
+export interface CapsuleFieldProps {
+  id?: string;
   label: string;
-  children: React.ReactNode;
+  className?: string;
+  hasError?: boolean;
+  children: ReactNode;
 }
 
-export const CapsuleField = ({ className, label, children }: Props): JSX.Element => (
-  <div className="relative w-full h-14 min-w-60 group focus-within:text-black">
-    <Label
+/** Floating label wrapper for form controls with consistent error styling */
+export const CapsuleField = ({
+  id,
+  label,
+  className,
+  hasError = false,
+  children,
+}: CapsuleFieldProps): JSX.Element => {
+  const errorTextClass = getErrorStyles(hasError, ["text"]);
+
+  return (
+    <div
       className={cn(
-        "absolute -top-2 left-4",
-        "px-1",
-        "text-sm font-light text-muted-foreground",
-        "bg-white",
-        "transition-colors duration-300 ease-in-out",
-        "group-hover:text-black group-focus-within:text-black",
+        "relative w-full h-14 min-w-60 group focus-within:text-black",
+        errorTextClass,
         className
-      )}>
-      {label}
-    </Label>
-    {children}
-  </div>
-);
+      )}
+    >
+      <Label
+        htmlFor={id}
+        className={cn(
+          "absolute -top-2 left-4 px-1",
+          "text-sm font-light text-muted-foreground bg-white",
+          "transition-colors duration-300",
+          "group-hover:text-current group-focus-within:text-black",
+          errorTextClass
+        )}
+      >
+        {label}
+      </Label>
+      {children}
+    </div>
+  );
+};
