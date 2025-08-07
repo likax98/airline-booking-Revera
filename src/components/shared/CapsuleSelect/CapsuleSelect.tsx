@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { formatLabeledText } from "@/lib/utils/strings";
-import { getErrorStyles } from "@/lib/utils/errors";
+import { getErrorClasses } from "@/lib/utils/errors";
 
 import { CapsuleField } from "../CapsuleField";
 import { MESSAGES } from "../lib/constants";
@@ -39,12 +39,8 @@ export const CapsuleSelect = ({
           "px-6 py-4",
           "border border-gray-400 rounded-full",
           "text-lg font-light text-center text-gray-500",
-          "appearance-none outline-none [&>svg]:hidden",
-          "focus:ring-0 focus:outline-none focus:border-gray-400",
           "transition-colors duration-300",
-          "hover:text-black hover:border-black",
-          "data-[placeholder]:hover:text-black",
-          getErrorStyles(hasError, ["text", "border", "placeholder"])
+          getErrorClasses(hasError, ["text", "border", "placeholder"])
         )}>
         <SelectValue placeholder={formatLabeledText("Select", label)} />
       </SelectTrigger>

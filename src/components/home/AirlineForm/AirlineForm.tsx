@@ -85,7 +85,7 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
               <Bounded>
                 <div className="flex flex-col gap-y-10">
                   <RouteFields {...{ control, cities }} />
-                  <FlightDateFields />
+                  <FlightDateFields {...{ control }} />
                   <div className="block w-auto max-w-sm mx-auto lg:hidden">
                     <FlightDateCalendar
                       {...{ control, destinations, setValue }}

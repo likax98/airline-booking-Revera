@@ -1,28 +1,21 @@
 "use client";
 
-import { Control } from "react-hook-form";
+import type { Control } from "react-hook-form";
 
-import { FormField, FormItem } from "@/components/ui/form";
-import {
-  FormFields,
-  type BookingFormValuesType,
-} from "@/components/home/AirlineForm/lib";
+import { Option } from "@/components/home/AirlineForm/components";
+import { ControlledField } from "@/components/shared/ControlledField";
+import type { BookingFormValuesType } from "@/components/home/AirlineForm/lib";
 
-import { Option } from "./Option";
-
-interface Props {
+type Props = {
   control: Control<BookingFormValuesType>;
-}
+};
 
 export const FlightTypeOptionField = ({ control }: Props): JSX.Element => (
   <div className="flex flex-col mt-16 mb-11 sm:flex-row">
-    <FormField
-      name={FormFields.FlightTypeOption}
-      render={({ field: { value, onChange } }) => (
-        <FormItem>
-          <Option {...{ value, onChange }} />
-        </FormItem>
-      )}
+    <ControlledField<BookingFormValuesType, "flightTypeOption">
+      name="flightTypeOption"
+      renderErrorMessages={false}
+      render={({ field }) => <Option {...field} />}
       {...{ control }}
     />
   </div>

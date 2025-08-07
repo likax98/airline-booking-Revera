@@ -10,7 +10,7 @@
  **/
 type ErrorStyleTarget = "text" | "border" | "placeholder";
 
-export const getErrorStyles = (
+export const getErrorClasses = (
   hasError?: boolean,
   targets: ErrorStyleTarget[] = ["text", "border"]
 ): string => {

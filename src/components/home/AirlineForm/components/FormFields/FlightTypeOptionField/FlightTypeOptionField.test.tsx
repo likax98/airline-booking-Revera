@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 import { replaceDashWithSpace } from "@/lib/utils/strings";
 import {
@@ -10,9 +10,13 @@ import {
 import { FlightTypeOptionField } from "./FlightTypeOptionField";
 
 const TestWrapper = (): JSX.Element => {
-  const { control } = useForm<BookingFormValuesType>();
+  const form = useForm<BookingFormValuesType>();
 
-  return <FlightTypeOptionField {...{ control }} />;
+  return (
+    <FormProvider {...form}>
+      <FlightTypeOptionField control={form.control} />
+    </FormProvider>
+  );
 };
 
 describe("FlightTypeOptionField", () => {

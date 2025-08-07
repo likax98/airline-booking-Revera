@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils/classnames";
 import { formatDate, isValidDate } from "@/lib/utils/dates";
 import { formatLabeledText } from "@/lib/utils/strings";
-import { getErrorStyles } from "@/lib/utils/errors";
+import { getErrorClasses } from "@/lib/utils/errors";
 import { Button } from "@/components/ui/button";
 import { CapsuleField } from "@/components/shared/CapsuleField";
 import { getDateAriaLabel } from "@/components/home/AirlineForm/lib/helpers";
@@ -25,17 +25,16 @@ export const DateSelectButton = ({
 
   const isActiveDataField = activeDateField === label;
   const date = isValidDate(value) ? value : undefined;
-
-  const toggle = (): void => {
-    setActiveDateField((prev) => (prev === label ? undefined : label));
-  };
-
-  const errorStyles = getErrorStyles(hasError, [
+  const placeholder = formatLabeledText("Select", label, "Date");
+  const errorStyles = getErrorClasses(hasError, [
     "text",
     "border",
     "placeholder",
   ]);
-  const placeholder = formatLabeledText("Select", label, "Date");
+
+  const toggle = (): void => {
+    setActiveDateField((prev) => (prev === label ? undefined : label));
+  };
 
   return (
     <CapsuleField {...{ label, hasError }}>
