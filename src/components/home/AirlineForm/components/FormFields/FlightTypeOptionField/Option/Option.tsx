@@ -9,11 +9,14 @@ import {
 } from "@/components/home/AirlineForm/lib";
 
 export interface OptionProps {
-  value: FlightOptionType;
+  value?: FlightOptionType;
   onChange: (e: FlightOptionType) => void;
 }
 
-export const Option = ({ value, onChange }: OptionProps): JSX.Element => (
+export const Option = ({
+  value = FLIGHT_OPTIONS[0],
+  onChange,
+}: OptionProps): JSX.Element => (
   <RadioGroup className="flex gap-6" onValueChange={onChange} {...{ value }}>
     {FLIGHT_OPTIONS.map((option) => (
       <div className="flex items-center space-x-2" key={option}>

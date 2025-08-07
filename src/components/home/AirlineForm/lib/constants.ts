@@ -17,17 +17,20 @@ export const ARIA_LABELS = {
 // Messages
 export const MESSAGES = {
   BOOKING_CONFIRMED: "Booking confirmed",
-  BOOKING_FAILED: "Booking failed",
   SELECT_ORIGIN_AND_DESTINATION: "Select origin and destination first",
   SELECT_DATE_FIELD: "Select From or To date field",
 };
 
 // Error Messages
 export const ERROR_MESSAGES = {
+  BOOKING_FAILED: "Booking failed",
   ORIGIN_REQUIRED: "Origin city is required",
   DESTINATION_REQUIRED: "Destination city is required",
+  INVALID_URL: "URL is invalid!",
   FROM_DATE_REQUIRED: "Departure date is required",
+  FROM_DATE_IS_INVALID: "From date is invalid",
   TO_DATE_REQUIRED: "Return date is required",
+  TO_DATE_IS_INVALID: "To date is invalid",
   GENERIC_ERROR: "Something went wrong",
 };
 

@@ -3,8 +3,8 @@ import { z } from "zod";
 import { ERROR_MESSAGES, FLIGHT_OPTIONS } from "./constants";
 
 const getCitySchema = (cities: string[], message: string) => {
-  if (!cities.length) {
-    throw new Error("City list cannot be empty");
+  if (!cities?.length) {
+    throw new Error("Cities cannot be empty");
   }
 
   return z.enum(cities as [string, ...string[]], {
@@ -19,8 +19,10 @@ export const createBookingFormSchema = (cities: string[]) =>
     flightTypeOption: z.enum(FLIGHT_OPTIONS as [string, ...string[]]),
     fromDate: z.date({
       required_error: ERROR_MESSAGES.FROM_DATE_REQUIRED,
+      invalid_type_error: ERROR_MESSAGES.FROM_DATE_IS_INVALID,
     }),
     toDate: z.date({
       required_error: ERROR_MESSAGES.TO_DATE_REQUIRED,
+      invalid_type_error: ERROR_MESSAGES.TO_DATE_IS_INVALID,
     }),
   });

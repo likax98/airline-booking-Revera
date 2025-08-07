@@ -70,6 +70,9 @@ describe("FlightDateCalendar", () => {
 
   beforeAll(() => {
     user = userEvent.setup();
+  });
+
+  beforeEach(() => {
     mockSetActiveDateField.mockClear();
   });
 

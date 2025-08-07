@@ -15,7 +15,7 @@ import { useFlightDateField } from "@/components/home/AirlineForm/context";
 
 const [fromDateConfig, toDateConfig] = DATE_FIELDS_CONFIG;
 
-// Main logic of the Calendar. It is tested in the Calendar component unit test
+// Functionality is tested in the Calendar component unit test
 export const useCalendarLogic = ({
   control,
   setValue,

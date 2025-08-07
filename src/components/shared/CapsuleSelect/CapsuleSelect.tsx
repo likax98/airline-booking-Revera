@@ -22,44 +22,54 @@ export interface CapsuleSelectProps {
   onChange: (value: string) => void;
 }
 
-// Shadcn Select renders its placeholder and dropdown with a delay because it mounts via a portal after hydration
 export const CapsuleSelect = ({
   label,
   options = [],
-  value = "",
+  value,
   hasError = false,
   onChange,
-}: CapsuleSelectProps): JSX.Element => (
-  <CapsuleField {...{ label, hasError }}>
-    <Select onValueChange={onChange} {...{ value }}>
-      <SelectTrigger
-        className={cn(
-          "w-full h-full lg:w-60",
-          "flex items-center justify-center",
-          "px-6 py-4",
-          "border border-gray-400 rounded-full",
-          "text-lg font-light text-center text-gray-500",
-          "transition-colors duration-300",
-          getErrorClasses(hasError, ["text", "border", "placeholder"])
-        )}>
-        <SelectValue placeholder={formatLabeledText("Select", label)} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.length ? (
-          options.map((option) => (
-            <SelectItem
-              className="flex justify-center cursor-pointer"
-              key={option}
-              value={option}>
-              {option}
-            </SelectItem>
-          ))
-        ) : (
-          <div className="py-2 text-center text-sm text-gray-400 select-none">
-            {MESSAGES.NO_OPTIONS_AVAILABLE}
-          </div>
-        )}
-      </SelectContent>
-    </Select>
-  </CapsuleField>
-);
+}: CapsuleSelectProps): JSX.Element => {
+  const selectedValue = options.includes(value ?? "") ? value : "";
+  const placeholder = formatLabeledText("Select", label);
+  const errorClasses = getErrorClasses(hasError, [
+    "text",
+    "border",
+    "placeholder",
+  ]);
+
+  return (
+    <CapsuleField {...{ label, hasError }}>
+      <Select value={selectedValue} onValueChange={onChange}>
+        <SelectTrigger
+          className={cn(
+            "w-full h-full lg:w-60",
+            "flex items-center justify-center",
+            "px-6 py-4",
+            "border border-gray-400 rounded-full",
+            "text-lg font-light text-center text-gray-500",
+            "transition-colors duration-300",
+            errorClasses
+          )}>
+          <SelectValue {...{ placeholder }} />
+        </SelectTrigger>
+
+        <SelectContent>
+          {options.length > 0 ? (
+            options.map((option) => (
+              <SelectItem
+                key={option}
+                value={option}
+                className="flex justify-center cursor-pointer">
+                {option}
+              </SelectItem>
+            ))
+          ) : (
+            <div className="py-2 text-center text-sm text-gray-400 select-none">
+              {MESSAGES.NO_OPTIONS_AVAILABLE}
+            </div>
+          )}
+        </SelectContent>
+      </Select>
+    </CapsuleField>
+  );
+};

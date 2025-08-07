@@ -25,7 +25,7 @@ test("shows error toast when booking fails", async ({ page }) => {
 
   await fillAirlineForm(page);
 
-  await expect(page.getByText(MESSAGES.BOOKING_FAILED)).toBeVisible();
+  await expect(page.getByText(ERROR_MESSAGES.BOOKING_FAILED)).toBeVisible();
 });
 
 // If we hardcode the date strings, it will break in the future. So we need to get today + days

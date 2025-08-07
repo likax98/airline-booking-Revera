@@ -3,7 +3,6 @@ import { toast } from "@/hooks/use-toast";
 import type { BookingFormValuesType } from "../types";
 import { ERROR_MESSAGES, MESSAGES } from "../constants";
 
-// Submits a booking request to the API and triggers toast notifications
 export const submitBooking = async (
   data: BookingFormValuesType
 ): Promise<void> => {
@@ -57,7 +56,7 @@ const showSuccessToast = (result: {
 
 const showErrorToast = (message: string): void => {
   toast({
-    title: MESSAGES.BOOKING_FAILED,
+    title: ERROR_MESSAGES.BOOKING_FAILED,
     description: message || ERROR_MESSAGES.GENERIC_ERROR,
     variant: "destructive",
   });
