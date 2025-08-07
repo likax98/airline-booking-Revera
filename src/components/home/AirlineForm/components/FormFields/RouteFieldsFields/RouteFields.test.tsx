@@ -30,8 +30,8 @@ const TestWrapper = ({
   return (
     <FormProvider {...form}>
       <RouteFields
-        control={form.control}
         cities={mockCities}
+        control={form.control}
         {...{ origin, destination }}
       />
     </FormProvider>

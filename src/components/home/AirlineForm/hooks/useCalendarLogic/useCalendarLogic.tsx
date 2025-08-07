@@ -1,5 +1,3 @@
-"use client";
-
 import { useMemo } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 
@@ -17,7 +15,7 @@ import { useFlightDateField } from "@/components/home/AirlineForm/context";
 
 const [fromDateConfig, toDateConfig] = DATE_FIELDS_CONFIG;
 
-// Main logic of the Calendar. It is tested in the component test
+// Main logic of the Calendar. It is tested in the Calendar component unit test
 export const useCalendarLogic = ({
   control,
   setValue,
@@ -65,12 +63,12 @@ export const useCalendarLogic = ({
   };
 
   return {
-    selectedDate,
-    disabledDates,
-    activeDateField,
-    setActiveDateField,
     origin,
+    selectedDate,
     destination,
+    activeDateField,
+    disabledDates,
+    setActiveDateField,
     handleDateSelect,
   };
 };

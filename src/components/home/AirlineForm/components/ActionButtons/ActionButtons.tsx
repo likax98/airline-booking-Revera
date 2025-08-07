@@ -33,11 +33,11 @@ export const ActionButtons = ({ isSubmitting }: Props): JSX.Element => {
         {isSubmitting ? LABELS.BOOKING_FLIGHT : LABELS.BOOK_FLIGHT}
       </Button>
       <Button
+        className={cn(!isValid && "opacity-0 invisible pointer-events-none")}
         type="button"
         variant="reset"
         size="form"
-        onClick={handleReset}
-        className={cn(!isValid && "opacity-0 invisible pointer-events-none")}>
+        onClick={handleReset}>
         {LABELS.RESET}
       </Button>
     </div>

@@ -26,8 +26,8 @@ import type {
 /**
  * Sets the selected date based on the active field label
  *
- * @param setFromDate - Callback to set the 'from' date
- * @param setToDate - Callback to set the 'to' date
+ * @param setFromDate - Callback to set the 'from' (return) date
+ * @param setToDate - Callback to set the 'to' (departure) date
  * @param date - The selected date
  * @param activeField - The currently active date field label
  */
@@ -152,13 +152,11 @@ export const getRoutesConfig = ({
 
 /**
  * Extracts default form values from a given URLSearchParams object
- *
  * If any query parameter is missing or invalid, it falls back to default values
  *
  * @param params - The URLSearchParams object, typically from "useSearchParams()" or "new URLSearchParams(window.location.search)"
  *
  * @returns A partial object containing form values like origin, destination, flight type, and dates
- *
  **/
 export const getDefaultValuesFromSearchParams = (
   params: URLSearchParams | null
@@ -186,7 +184,6 @@ export const getDefaultValuesFromSearchParams = (
  * @param activeDateField - The currently active date field ("from" or "to"), if any
  *
  * @returns A message string if there's a missing value, otherwise "null"
- *
  **/
 export const getCalendarWarningMessage = ({
   origin,

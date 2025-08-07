@@ -30,8 +30,7 @@ export const CapsuleField = ({
         "relative w-full h-14 min-w-60 group focus-within:text-black",
         errorTextClass,
         className
-      )}
-    >
+      )}>
       <Label
         htmlFor={id}
         className={cn(
@@ -40,8 +39,7 @@ export const CapsuleField = ({
           "transition-colors duration-300",
           "group-hover:text-current group-focus-within:text-black",
           errorTextClass
-        )}
-      >
+        )}>
         {label}
       </Label>
       {children}

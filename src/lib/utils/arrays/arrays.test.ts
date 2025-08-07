@@ -1,6 +1,6 @@
 import { excludeItem } from "./arrays";
 
-const cities =["Paris", "London", "Tokyo"];
+const cities = ["Paris", "London", "Tokyo"];
 const [city, ...otherCities] = cities;
 
 describe("excludeItem", () => {
@@ -23,7 +23,8 @@ describe("excludeItem", () => {
   });
 
   it("returns empty array if all items are excluded", () => {
-    const result = excludeItem(["A"], "A");
+    const str = "AB";
+    const result = excludeItem([str], str);
 
     expect(result).toEqual([]);
   });
@@ -32,7 +33,7 @@ describe("excludeItem", () => {
     const original = ["a", "b", "c"];
     const copy = [...original];
 
-    excludeItem(original, "b");
+    excludeItem(original, original[1]);
 
     expect(original).toEqual(copy);
   });

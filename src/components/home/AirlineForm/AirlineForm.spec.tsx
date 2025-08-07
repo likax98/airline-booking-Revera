@@ -15,7 +15,7 @@ test("fills and submits the airline form", async ({ page }) => {
 });
 
 test("shows error toast when booking fails", async ({ page }) => {
-   await page.route("**/api/booking", async (route) => {
+  await page.route("**/api/booking", async (route) => {
     await route.fulfill({
       status: 500,
       contentType: "application/json",

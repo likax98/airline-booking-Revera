@@ -32,6 +32,9 @@ const requiredMessages = [
   ERROR_MESSAGES.TO_DATE_REQUIRED,
 ];
 
+const renderComponent = (): RenderResult =>
+  render(<AirlineForm {...{ destinations }} />);
+
 describe("AirlineForm", () => {
   beforeAll(() => {
     // Needed for Shadcn
@@ -43,9 +46,7 @@ describe("AirlineForm", () => {
   });
 
   it("renders form fields", () => {
-    const { getByText, getByRole } = render(
-      <AirlineForm {...{ destinations }} />
-    );
+    const { getByText, getByRole } = renderComponent();
 
     const labels = Object.values(FormFieldLabel);
 
@@ -57,48 +58,20 @@ describe("AirlineForm", () => {
       getByRole("button", { name: LABELS.BOOK_FLIGHT })
     ).toBeInTheDocument();
   });
-
-  const renderComponent = (): RenderResult =>
-    render(<AirlineForm {...{ destinations }} />);
-
-  describe("AirlineForm", () => {
-    beforeAll(() => {
-      // Needed for Shadcn
-      global.ResizeObserver = class {
-        observe() {}
-        unobserve() {}
-        disconnect() {}
-      };
-    });
-
-    it("renders form fields", () => {
-      const { getByText, getByRole } = renderComponent();
-
-      const labels = Object.values(FormFieldLabel);
-
-      labels.forEach((label) => {
-        expect(getByText(label)).toBeInTheDocument();
-      });
-
-      expect(
-        getByRole("button", { name: LABELS.BOOK_FLIGHT })
-      ).toBeInTheDocument();
-    });
-  });
-
-  it("shows validation errors when submitting empty form", async () => {
-    const user = userEvent.setup();
-
-    const { getByText, getByRole } = renderComponent();
-
-    await user.click(getByRole("button", { name: LABELS.BOOK_FLIGHT }));
-
-    await waitFor(() => {
-      requiredMessages.forEach((message) => {
-        expect(getByText(message)).toBeInTheDocument();
-      });
-    });
-  });
-
-  // We gonna test form submission in Playwright or it will be a hell
 });
+
+it("shows validation errors when submitting empty form", async () => {
+  const user = userEvent.setup();
+
+  const { getByText, getByRole } = renderComponent();
+
+  await user.click(getByRole("button", { name: LABELS.BOOK_FLIGHT }));
+
+  await waitFor(() => {
+    requiredMessages.forEach((message) => {
+      expect(getByText(message)).toBeInTheDocument();
+    });
+  });
+});
+
+// The form submission is tested in Playwright, check "AirplaneForm.spec.tsx"

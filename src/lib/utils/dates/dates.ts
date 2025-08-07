@@ -66,10 +66,10 @@ export const isBefore = (date: Date, compareDate: Date): boolean =>
 
 /**
  * Checks if two dates fall on the same calendar day
- * 
+ *
  * @param date - The first date to compare
  * @param compareDate - The second date to compare
- * 
+ *
  * @returns `true` if both dates are on the same calendar day, otherwise "false"
  */
 export const isSameDay = (date: Date, compareDate: Date): boolean =>

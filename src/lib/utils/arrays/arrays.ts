@@ -1,6 +1,5 @@
 /**
  * Returns a new array with the specified item excluded
- *
  * If "itemToExclude" is "undefined", the original array is returned unchanged
  *
  * @template T - The type of the items in the array
