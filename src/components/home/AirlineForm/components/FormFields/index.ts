@@ -1,3 +1,3 @@
-export * from "./RouteFieldsFields";
+export * from "./RouteFields";
 export * from "./FlightTypeField";
 export * from "./FlightDateFields";
