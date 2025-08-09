@@ -17,8 +17,8 @@ import { mockCities } from "@/components/home/AirlineForm/__mocks___";
 
 import { DateSelectButton } from "./DateSelectButton";
 
-const [field] = DATE_FIELDS_CONFIG;
-const { label } = field;
+const [DATE_FIELD] = DATE_FIELDS_CONFIG;
+const { label } = DATE_FIELD;
 const placeholderText = formatLabeledText("Select", label, "Date");
 
 const mockSetActiveDateField = jest.fn();

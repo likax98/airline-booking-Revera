@@ -1,16 +1,16 @@
 "use client";
 
-import { Control, useWatch } from "react-hook-form";
+import { useWatch, type Control } from "react-hook-form";
 
 import { CapsuleSelect, ControlledField } from "@/components/shared";
 import {
   FormFields,
   type BookingFormValuesType,
-  type RouteFieldName,
+  type RouteFieldNameType,
 } from "@/components/home/AirlineForm/lib";
 import { getRoutesConfig } from "@/components/home/AirlineForm/lib/helpers";
 
-type Props = {
+interface Props {
   control: Control<BookingFormValuesType>;
   cities: string[];
 };
@@ -26,9 +26,10 @@ export const RouteFields = ({ control, cities }: Props): JSX.Element => {
   return (
     <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-12">
       {config.map(({ label, ...selectProps }) => (
-        <ControlledField<BookingFormValuesType, RouteFieldName>
+        <ControlledField<BookingFormValuesType, RouteFieldNameType>
           key={label}
-          name={label.toLowerCase() as RouteFieldName}
+          renderErrors
+          name={label.toLowerCase() as RouteFieldNameType}
           render={({ field, error }) => (
             <CapsuleSelect
               hasError={error}

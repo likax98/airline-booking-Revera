@@ -1,21 +1,18 @@
 import { render, RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useFormContext } from "react-hook-form";
 
 import { LABELS } from "../../lib";
 import { ActionButtons } from "./ActionButtons";
 
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
-}));
-
-jest.mock("react-hook-form", () => ({
-  useFormContext: jest.fn(),
-}));
+jest.mock("next/navigation");
+jest.mock("react-hook-form");
 
 const mockReset = jest.fn();
 const mockReplace = jest.fn();
+
+const { BOOK_FLIGHT, BOOKING_FLIGHT_LOADING, RESET } = LABELS;
 
 const renderComponent = ({
   isValid = true,
@@ -44,19 +41,19 @@ describe("ActionButtons", () => {
   it("renders both buttons when form is valid", () => {
     const { getByRole } = renderComponent();
 
-    const submitBtn = getByRole("button", { name: LABELS.BOOK_FLIGHT });
-    const resetBtn = getByRole("button", { name: LABELS.RESET });
+    const submitBtn = getByRole("button", { name: BOOK_FLIGHT });
+    const resetBtn = getByRole("button", { name: RESET });
 
     expect(submitBtn).toBeInTheDocument();
     expect(resetBtn).toBeInTheDocument();
   });
 
-  it(`calls 'reset' and 'router.replace' when ${LABELS.RESET} clicked`, async () => {
+  it(`calls 'reset' and 'router.replace' when ${RESET} clicked`, async () => {
     const user = userEvent.setup();
 
     const { getByRole } = renderComponent();
 
-    const resetBtn = getByRole("button", { name: LABELS.RESET });
+    const resetBtn = getByRole("button", { name: RESET });
 
     await user.click(resetBtn);
 
@@ -64,31 +61,31 @@ describe("ActionButtons", () => {
     expect(mockReplace).toHaveBeenCalledWith("/");
   });
 
-  it(`hides ${LABELS.RESET} button when form is invalid`, () => {
+  it(`hides ${RESET} button when form is invalid`, () => {
     const { getByRole } = renderComponent({ isValid: false });
 
-    const resetBtn = getByRole("button", { name: LABELS.RESET });
+    const resetBtn = getByRole("button", { name: RESET });
 
     expect(resetBtn).toHaveClass("opacity-0 invisible pointer-events-none");
   });
 
-  it(`disables submit button and shows '${LABELS.BOOKING_FLIGHT}' when submitting`, async () => {
+  it(`disables submit button and shows '${BOOKING_FLIGHT_LOADING}' when submitting`, async () => {
     const user = userEvent.setup();
 
     const { getByRole } = renderComponent({ isSubmitting: true });
 
-    const submitBtn = getByRole("button", { name: LABELS.BOOKING_FLIGHT });
+    const submitBtn = getByRole("button", { name: BOOKING_FLIGHT_LOADING });
 
     await user.click(submitBtn);
 
     expect(submitBtn).toBeDisabled();
-    expect(submitBtn).toHaveTextContent(LABELS.BOOKING_FLIGHT);
+    expect(submitBtn).toHaveTextContent(BOOKING_FLIGHT_LOADING);
   });
 
   it("does not disable submit button when form is invalid", () => {
     const { getByRole } = renderComponent({ isValid: false });
 
-    const submitBtn = getByRole("button", { name: LABELS.BOOK_FLIGHT });
+    const submitBtn = getByRole("button", { name: BOOK_FLIGHT });
 
     expect(submitBtn).not.toBeDisabled();
   });

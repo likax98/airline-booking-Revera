@@ -7,7 +7,7 @@ interface Props {
 }
 
 // You can see how it looks in Storybook
-export const Spinner = ({ className }: Props) => (
+export const Spinner = ({ className }: Props): JSX.Element => (
   <div
     role="status"
     aria-live="polite"

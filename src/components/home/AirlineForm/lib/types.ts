@@ -7,14 +7,14 @@ export type BookingFormSchemaType = z.infer<
   ReturnType<typeof createBookingFormSchema>
 >;
 
-export type RouteFieldName = "origin" | "destination";
+export type RouteFieldNameType = "origin" | "destination";
 
 export type FlightOptionType = (typeof FLIGHT_OPTIONS)[number];
 
 export type BookingFormValuesType = {
   origin: string;
   destination: string;
-  flightTypeOption: FlightOptionType;
+  type: FlightOptionType;
   fromDate: Date;
   toDate: Date;
 };

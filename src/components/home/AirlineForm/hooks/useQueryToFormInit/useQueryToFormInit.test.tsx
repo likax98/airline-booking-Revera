@@ -8,7 +8,7 @@ import {
 
 import { useQueryToFormInit } from "./useQueryToFormInit";
 
-const [roundTrip] = FLIGHT_OPTIONS;
+const [ROUND_TRIP] = FLIGHT_OPTIONS;
 
 let mockSearchParams: URLSearchParams;
 
@@ -38,7 +38,7 @@ const expectFieldsToMatch = (
 ): void => {
   expect(args.origin).toBe(expected.origin);
   expect(args.destination).toBe(expected.destination);
-  expect(args.flightTypeOption).toBe(expected.type ?? roundTrip);
+  expect(args.type).toBe(expected.type ?? ROUND_TRIP);
   expectDateEquals(args.fromDate, expected.departureDate);
   expectDateEquals(args.toDate, expected.returnDate);
 };
@@ -52,11 +52,10 @@ describe("useQueryToFormInit", () => {
     const data = {
       origin: "Tbilisi",
       destination: "Paris",
+      type: ROUND_TRIP,
       departureDate: "2025-08-20",
       returnDate: "2025-08-28",
-      type: roundTrip,
     };
-
     mockSearchParams = new URLSearchParams(data);
 
     renderHook(() => {
@@ -64,25 +63,7 @@ describe("useQueryToFormInit", () => {
     });
 
     const args = mockReset.mock.calls[0][0];
-    expectFieldsToMatch(args, data);
-  });
 
-  it("uses fallback flight type if type param is missing", () => {
-    const data = {
-      origin: "London",
-      destination: "Berlin",
-      departureDate: "2025-09-01",
-      returnDate: "2025-09-10",
-      // not passing type
-    };
-
-    mockSearchParams = new URLSearchParams(data);
-
-    renderHook(() => {
-      useQueryToFormInit(mockReset);
-    });
-
-    const args = mockReset.mock.calls[0][0];
     expectFieldsToMatch(args, data);
   });
 

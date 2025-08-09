@@ -2,18 +2,20 @@ import { render, fireEvent, RenderResult } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { formatLabeledText } from "@/lib/utils/strings";
-import type { BookingFormValuesType } from "@/components/home/AirlineForm/lib";
+import type {
+  BookingFormValuesType,
+  RouteFieldNameType,
+} from "@/components/home/AirlineForm/lib";
 import { getRoutesConfig } from "@/components/home/AirlineForm/lib/helpers";
 import { mockCities } from "@/components/home/AirlineForm/__mocks___";
 
 import { RouteFields } from "./RouteFields";
 
 type TestWrapperProps = Partial<
-  Pick<BookingFormValuesType, "origin" | "destination">
+  Pick<BookingFormValuesType, RouteFieldNameType>
 >;
 
 const [origin, destination] = mockCities;
-
 const config = getRoutesConfig({
   cities: mockCities,
   origin,

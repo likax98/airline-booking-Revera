@@ -32,6 +32,8 @@ const requiredMessages = [
   ERROR_MESSAGES.TO_DATE_REQUIRED,
 ];
 
+const { BOOK_FLIGHT } = LABELS;
+
 const renderComponent = (): RenderResult =>
   render(<AirlineForm {...{ destinations }} />);
 
@@ -55,7 +57,7 @@ describe("AirlineForm", () => {
       expect(getByText(label)).toBeInTheDocument();
     });
 
-    const submitBtn = getByRole("button", { name: LABELS.BOOK_FLIGHT });
+    const submitBtn = getByRole("button", { name: BOOK_FLIGHT });
 
     expect(submitBtn).toBeInTheDocument();
   });
@@ -66,7 +68,7 @@ it("shows validation errors when submitting empty form", async () => {
 
   const { getByText, getByRole } = renderComponent();
 
-  await user.click(getByRole("button", { name: LABELS.BOOK_FLIGHT }));
+  await user.click(getByRole("button", { name: BOOK_FLIGHT }));
 
   await waitFor(() => {
     requiredMessages.forEach((message) => {

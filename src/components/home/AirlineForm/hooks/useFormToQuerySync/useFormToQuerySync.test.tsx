@@ -10,11 +10,11 @@ import {
 
 import { useFormToQuerySync } from "./useFormToQuerySync";
 
-const [roundTrip] = FLIGHT_OPTIONS;
+const [ROUND_TRIP] = FLIGHT_OPTIONS;
 const sharedProps = {
   fromDate: new Date("2025-10-01"),
   toDate: new Date("2025-10-15"),
-  flightTypeOption: roundTrip,
+  type: ROUND_TRIP,
 };
 
 const mockPush = jest.fn();
@@ -45,7 +45,7 @@ describe("useFormToQuerySync", () => {
     const origin = "Rome";
     const destination = "Tokyo";
 
-    const query = `?origin=${origin}&destination=${destination}&departureDate=2025-10-01&returnDate=2025-10-15&type=${roundTrip}`;
+    const query = `?origin=${origin}&destination=${destination}&departureDate=2025-10-01&returnDate=2025-10-15&type=${ROUND_TRIP}`;
 
     const { result } = setup({
       origin,
@@ -58,7 +58,7 @@ describe("useFormToQuerySync", () => {
       result.current.setValue(FormFields.Destination, destination);
       result.current.setValue(FormFields.FromDate, sharedProps.fromDate);
       result.current.setValue(FormFields.ToDate, sharedProps.toDate);
-      result.current.setValue(FormFields.FlightTypeOption, roundTrip);
+      result.current.setValue(FormFields.FlightTypeOption, ROUND_TRIP);
     });
 
     expect(mockPush).toHaveBeenCalledTimes(1);
@@ -92,9 +92,9 @@ describe("useFormToQuerySync", () => {
     setup({
       origin: "New York",
       destination: "",
+      type: FLIGHT_OPTIONS[0],
       fromDate: undefined,
       toDate: undefined,
-      flightTypeOption: FLIGHT_OPTIONS[0],
     });
 
     expect(mockPush).not.toHaveBeenCalledTimes(1);

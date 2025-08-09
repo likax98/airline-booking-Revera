@@ -15,6 +15,15 @@ import {
 import { FlightDateCalendar } from "./FlightDateCalendar";
 import { mockCities } from "../../__mocks___";
 
+interface Props {
+  className?: string;
+  origin?: string;
+  destination?: string;
+  fromDate?: Date;
+  toDate?: Date;
+  activeDateField?: FormFieldLabel;
+}
+
 const mockSetActiveDateField = jest.fn();
 
 jest.mock("../../context", () => ({
@@ -24,28 +33,21 @@ jest.mock("../../context", () => ({
   }),
 }));
 
+const { FLIGHT_DATE_CALENDAR, FLIGHT_DATE_CALENDAR_WRAPPER } = TEST_IDS;
+const { SELECT_ORIGIN_AND_DESTINATION } = MESSAGES;
 const [origin, destination] = mockCities;
-
-interface TestComponentProps {
-  className?: string;
-  origin?: string;
-  destination?: string;
-  fromDate?: Date;
-  toDate?: Date;
-  activeDateField?: FormFieldLabel;
-}
 
 const TestComponent = ({
   origin,
   destination,
   fromDate,
   toDate,
-}: TestComponentProps): JSX.Element => {
+}: Props): JSX.Element => {
   const form = useForm<BookingFormValuesType>({
     defaultValues: {
       origin,
       destination,
-      flightTypeOption: FLIGHT_OPTIONS[1],
+      type: FLIGHT_OPTIONS[1],
       fromDate,
       toDate,
     },
@@ -62,7 +64,7 @@ const TestComponent = ({
   );
 };
 
-const renderComponent = (props?: Partial<TestComponentProps>): RenderResult =>
+const renderComponent = (props?: Partial<Props>): RenderResult =>
   render(<TestComponent {...{ origin, destination }} {...props} />);
 
 describe("FlightDateCalendar", () => {
@@ -79,7 +81,7 @@ describe("FlightDateCalendar", () => {
   it("renders correctly", () => {
     const { getByTestId } = renderComponent();
 
-    const calendar = getByTestId(TEST_IDS.FLIGHT_DATE_CALENDAR);
+    const calendar = getByTestId(FLIGHT_DATE_CALENDAR);
 
     expect(calendar).toBeInTheDocument();
   });
@@ -87,7 +89,7 @@ describe("FlightDateCalendar", () => {
   it("hides calendar when 'activeDateField' is undefined on viewport lg and above", () => {
     const { getByTestId } = renderComponent({ activeDateField: undefined });
 
-    const wrapper = getByTestId(TEST_IDS.FLIGHT_DATE_CALENDAR_WRAPPER);
+    const wrapper = getByTestId(FLIGHT_DATE_CALENDAR_WRAPPER);
 
     expect(wrapper).toHaveClass(
       "lg:opacity-0",
@@ -96,15 +98,13 @@ describe("FlightDateCalendar", () => {
     );
   });
 
-  it(`shows '${MESSAGES.SELECT_ORIGIN_AND_DESTINATION}' when origin/destination is missing`, () => {
+  it(`shows '${SELECT_ORIGIN_AND_DESTINATION}' when origin/destination is missing`, () => {
     const { getByText } = renderComponent({
       origin: undefined,
       destination: undefined,
     });
 
-    expect(
-      getByText(MESSAGES.SELECT_ORIGIN_AND_DESTINATION)
-    ).toBeInTheDocument();
+    expect(getByText(SELECT_ORIGIN_AND_DESTINATION)).toBeInTheDocument();
   });
 
   it("calls 'setActiveDateField' when close button is clicked", async () => {
@@ -127,7 +127,7 @@ describe("FlightDateCalendar", () => {
       toDate: new Date("2025-08-7"),
     });
 
-    const wrapper = getByTestId(TEST_IDS.FLIGHT_DATE_CALENDAR_WRAPPER);
+    const wrapper = getByTestId(FLIGHT_DATE_CALENDAR_WRAPPER);
 
     const today = new Date();
     const dayString = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;

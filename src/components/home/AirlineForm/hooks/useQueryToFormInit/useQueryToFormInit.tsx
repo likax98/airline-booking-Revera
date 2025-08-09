@@ -13,12 +13,12 @@ import {
 const queryParamKeys = [
   "origin",
   "destination",
+  "type",
   "departureDate",
   "returnDate",
-  "type",
 ];
 
-// Syncs form state from URL query parameters on load or when URL changes.
+// Syncs form state from URL query parameters on load or when URL changes
 // Resets form to blank if no valid query is present
 export const useQueryToFormInit = (
   reset: UseFormReset<BookingFormValuesType>
@@ -30,29 +30,26 @@ export const useQueryToFormInit = (
     [searchParams]
   );
 
-  const hasAnyQueryParams = useMemo(
-    () => Object.values(queryParams).some(Boolean),
-    [queryParams]
-  );
-
   useEffect(() => {
-    const { origin, destination, departureDate, returnDate, type } =
-      queryParams;
+    const values = Object.values(queryParams);
+    const hasAnyParams = values.some(Boolean);
 
-    if (!hasAnyQueryParams) {
+    if (!hasAnyParams) {
       reset(DEFAULT_BOOKING_FORM_VALUES);
 
       return;
     }
 
-    if (origin && destination && departureDate && returnDate) {
+    const hasAllParams = values.every(Boolean);
+
+    if (hasAllParams) {
       reset({
-        origin,
-        destination,
-        flightTypeOption: type ?? FLIGHT_OPTIONS[0],
-        fromDate: parseDateFromQuery(departureDate),
-        toDate: parseDateFromQuery(returnDate),
+        origin: queryParams.origin ?? undefined,
+        destination: queryParams.destination ?? undefined,
+        type: queryParams.type ?? FLIGHT_OPTIONS[0],
+        fromDate: parseDateFromQuery(queryParams.departureDate),
+        toDate: parseDateFromQuery(queryParams.returnDate),
       });
     }
-  }, [hasAnyQueryParams, queryParams, reset]);
+  }, [queryParams, reset]);
 };

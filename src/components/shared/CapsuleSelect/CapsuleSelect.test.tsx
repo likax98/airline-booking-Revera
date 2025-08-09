@@ -7,6 +7,7 @@ import { MESSAGES } from "../lib/constants";
 import { CapsuleSelect, type CapsuleSelectProps } from "./CapsuleSelect";
 
 const label = "Capsule";
+const { NO_OPTIONS_AVAILABLE } = MESSAGES;
 
 const mockOnChange = jest.fn();
 
@@ -56,15 +57,13 @@ describe("CapsuleSelect", () => {
 
     const { getByRole, getByText } = renderComponent();
 
-    const select = getByRole("combobox");
-
-    fireEvent.click(select);
+    fireEvent.click(getByRole("combobox"));
     fireEvent.click(getByText(option));
 
     expect(mockOnChange).toHaveBeenCalledWith(option);
   });
 
-  it(`shows ${MESSAGES.NO_OPTIONS_AVAILABLE} message when there are no options`, () => {
+  it(`shows ${NO_OPTIONS_AVAILABLE} message when there are no options`, () => {
     const { getByRole } = renderComponent({ options: [] });
 
     const select = getByRole("combobox");
@@ -74,7 +73,7 @@ describe("CapsuleSelect", () => {
     const dropdown = getByRole("listbox");
 
     expect(
-      within(dropdown).getByText(MESSAGES.NO_OPTIONS_AVAILABLE)
+      within(dropdown).getByText(NO_OPTIONS_AVAILABLE)
     ).toBeInTheDocument();
   });
 });

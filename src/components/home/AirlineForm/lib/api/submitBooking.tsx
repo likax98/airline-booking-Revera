@@ -54,10 +54,10 @@ const showSuccessToast = (result: {
   });
 };
 
-const showErrorToast = (message: string): void => {
+const showErrorToast = (message = ERROR_MESSAGES.GENERIC_ERROR): void => {
   toast({
     title: ERROR_MESSAGES.BOOKING_FAILED,
-    description: message || ERROR_MESSAGES.GENERIC_ERROR,
+    description: message,
     variant: "destructive",
   });
 };

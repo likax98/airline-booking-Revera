@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Control, UseFormSetValue, useWatch } from "react-hook-form";
+import { UseFormSetValue, useWatch, type Control } from "react-hook-form";
 
 import type { FlightDestination } from "@/types";
 import {
@@ -13,20 +13,21 @@ import {
 } from "@/components/home/AirlineForm/lib/helpers";
 import { useFlightDateField } from "@/components/home/AirlineForm/context";
 
-const [fromDateConfig, toDateConfig] = DATE_FIELDS_CONFIG;
+interface Props {
+  destinations: FlightDestination[];
+  control: Control<BookingFormValuesType>;
+  setValue: UseFormSetValue<BookingFormValuesType>;
+}
+
+const [FROM_DATE_CONFIG, TO_DATE_CONFIG] = DATE_FIELDS_CONFIG;
 
 // Functionality is tested in the Calendar component unit test
 export const useCalendarLogic = ({
+  destinations,
   control,
   setValue,
-  destinations,
-}: {
-  control: Control<BookingFormValuesType>;
-  destinations: FlightDestination[];
-  setValue: UseFormSetValue<BookingFormValuesType>;
-}) => {
+}: Props) => {
   const { activeDateField, setActiveDateField } = useFlightDateField();
-
   const [fromDate, toDate, origin, destination] = useWatch({
     control,
     name: [
@@ -37,7 +38,7 @@ export const useCalendarLogic = ({
     ],
   });
 
-  const isToFieldActive = activeDateField === toDateConfig.label;
+  const isToFieldActive = activeDateField === TO_DATE_CONFIG.label;
   const selectedDate = isToFieldActive ? toDate : fromDate;
 
   const disabledDates = useMemo(() => {
@@ -52,17 +53,12 @@ export const useCalendarLogic = ({
     );
   }, [activeDateField, destinations, destination, fromDate, isToFieldActive]);
 
-  const setDateField = (
-    fieldName: keyof BookingFormValuesType,
-    date: Date
-  ): void => {
-    setValue(fieldName, date, { shouldValidate: true });
-  };
-
   const handleDateSelect = (date?: Date): void => {
     setSelectedFlightDate(
-      (date) => setDateField(fromDateConfig.name, date),
-      (date) => setDateField(toDateConfig.name, date),
+      (date) =>
+        setValue(FROM_DATE_CONFIG["name"], date, { shouldValidate: true }),
+      (date) =>
+        setValue(TO_DATE_CONFIG["name"], date, { shouldValidate: true }),
       date,
       activeDateField
     );

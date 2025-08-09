@@ -5,8 +5,10 @@ import {
   isBefore,
   isSameDay,
   isValidDate,
+  isValidExactDate,
   parseDateFromQuery,
   startOfToday,
+  toTimestamp,
 } from "./dates";
 
 const invalidDateStr = "Invalid date";
@@ -83,6 +85,39 @@ describe("dates", () => {
 
       // Same time value
       expect(result1.getTime()).toBe(result2.getTime());
+    });
+  });
+
+  describe("toTimestamp", () => {
+    const dateString = "2025-08-09T12:34:56Z";
+
+    it("converts a date object to timestamp", () => {
+      const date = new Date(dateString);
+
+      expect(toTimestamp(date)).toBe(date.getTime());
+    });
+
+    it("converts a date string to timestamp", () => {
+      const expected = new Date(dateString).getTime();
+
+      expect(toTimestamp(dateString)).toBe(expected);
+    });
+
+    it("returns NaN for invalid date string", () => {
+      expect(toTimestamp("invalid-date")).toBeNaN();
+    });
+
+    it("returns valid timestamp for date string without time", () => {
+      const dateString = "2025-08-09";
+      const expected = new Date(dateString).getTime();
+
+      expect(toTimestamp(dateString)).toBe(expected);
+    });
+
+    it("returns valid timestamp for Date object at epoch", () => {
+      const date = new Date(0);
+      
+      expect(toTimestamp(date)).toBe(0);
     });
   });
 
@@ -190,6 +225,38 @@ describe("dates", () => {
     });
   });
 
+  describe("isValidExactDate", () => {
+    it("returns true when date exactly matches the input string", () => {
+      const input = "2025-08-20";
+
+      // UTC midnight
+      const date = new Date("2025-08-20T00:00:00Z");
+
+      expect(isValidExactDate(input, date)).toBe(true);
+    });
+
+    it("returns false when year does not match", () => {
+      const input = "2025-08-20";
+      const date = new Date("2024-08-20T00:00:00Z");
+
+      expect(isValidExactDate(input, date)).toBe(false);
+    });
+
+    it("returns false when month does not match", () => {
+      const input = "2025-08-20";
+      const date = new Date("2025-07-20T00:00:00Z");
+
+      expect(isValidExactDate(input, date)).toBe(false);
+    });
+
+    it("returns false when day does not match", () => {
+      const input = "2025-08-20";
+      const date = new Date("2025-08-19T00:00:00Z");
+
+      expect(isValidExactDate(input, date)).toBe(false);
+    });
+  });
+
   describe("parseDateFromQuery", () => {
     it("returns undefined if value is undefined", () => {
       expect(parseDateFromQuery(undefined)).toBeUndefined();
@@ -199,14 +266,29 @@ describe("dates", () => {
       expect(parseDateFromQuery(null)).toBeUndefined();
     });
 
-    it("returns undefined if value is invalid date string", () => {
-      expect(parseDateFromQuery(invalidDateStr)).toBeUndefined();
+    it("returns undefined if value is empty string", () => {
+      expect(parseDateFromQuery("")).toBeUndefined();
     });
+
+    test.each(["2025-02-30", "2025-13-01", "2025-00-10", "2025-01-00"])(
+      "returns undefined for invalid calendar date '%s'",
+      (invalidDate) => {
+        expect(parseDateFromQuery(invalidDate)).toBeUndefined();
+      }
+    );
+
+    test.each(["08/20/2025", "2025-8-20", "2025-08-2", "20250820"])(
+      "returns undefined for invalid date format '%s'",
+      (invalidFormat) => {
+        expect(parseDateFromQuery(invalidFormat)).toBeUndefined();
+      }
+    );
 
     it("returns Date object for valid date string", () => {
       const result = parseDateFromQuery("2025-08-20");
 
       expect(result).toBeInstanceOf(Date);
+      expect(result?.toISOString().startsWith("2025-08-20")).toBe(true);
     });
   });
 

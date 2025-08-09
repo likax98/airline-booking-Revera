@@ -3,11 +3,11 @@ import { useForm, FormProvider } from "react-hook-form";
 import { withDateFieldContext } from "@storybook/decorators/DateFieldDecorator";
 import { bookingFormDefaultValues } from "@/components/home/AirlineForm/__mocks___";
 
-import { FlightTypeOptionField } from "./FlightTypeOptionField";
+import { FlightTypeField } from "./FlightTypeField";
 
 export default {
-  title: "Home/AirlineForm/Fields/FlightTypeOptionField",
-  component: FlightTypeOptionField,
+  title: "Home/AirlineForm/Fields/FlightTypeField",
+  component: FlightTypeField,
   decorators: [withDateFieldContext],
   tags: ["autodocs"],
   parameters: {
@@ -28,7 +28,7 @@ export const Default = () => {
 
   return (
     <FormProvider {...form}>
-      <FlightTypeOptionField control={form.control} />
+      <FlightTypeField control={form.control} />
     </FormProvider>
   );
 };

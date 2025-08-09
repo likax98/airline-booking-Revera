@@ -6,12 +6,12 @@ import { FLIGHT_OPTIONS } from "@/components/home/AirlineForm/lib";
 
 import { Option, type OptionProps } from "./Option";
 
-const [roundTrip, oneWay] = FLIGHT_OPTIONS;
+const [ROUND_TRIP, ONE_WAY] = FLIGHT_OPTIONS;
 
 const mockOnChange = jest.fn();
 
 const defaultProps: OptionProps = {
-  value: roundTrip,
+  value: ROUND_TRIP,
   onChange: mockOnChange,
 };
 
@@ -41,6 +41,7 @@ describe("FlightTypeOptionField > Option", () => {
     const { getByRole } = renderComponent();
 
     const radios = getRadios(getByRole);
+
     expect(radios).toHaveLength(FLIGHT_OPTIONS.length);
   });
 
@@ -53,29 +54,30 @@ describe("FlightTypeOptionField > Option", () => {
   });
 
   it("marks only the selected radio as checked", async () => {
-    const { getByRole } = renderComponent({ value: oneWay });
+    const { getByRole } = renderComponent({ value: ONE_WAY });
 
-    const oneWayRadio = getRadioByLabel(getByRole, oneWay);
-    const roundTripRadio = getRadioByLabel(getByRole, roundTrip);
+    const oneWayRadio = getRadioByLabel(getByRole, ONE_WAY);
+    const roundTripRadio = getRadioByLabel(getByRole, ROUND_TRIP);
 
     expect(oneWayRadio).toBeChecked();
     expect(roundTripRadio).not.toBeChecked();
   });
 
   it("shows the correct default checked value", () => {
-    const { getByRole } = renderComponent({ value: oneWay });
+    const { getByRole } = renderComponent({ value: ONE_WAY });
 
-    const radio = getRadioByLabel(getByRole, oneWay);
+    const radio = getRadioByLabel(getByRole, ONE_WAY);
+  
     expect(radio).toBeChecked();
   });
 
   it("calls onChange when selecting a different option", async () => {
-    const { getByRole } = renderComponent({ value: roundTrip });
+    const { getByRole } = renderComponent({ value: ROUND_TRIP });
 
-    const targetRadio = getRadioByLabel(getByRole, oneWay);
+    const targetRadio = getRadioByLabel(getByRole, ONE_WAY);
 
     await user.click(targetRadio);
 
-    expect(mockOnChange).toHaveBeenCalledWith(oneWay);
+    expect(mockOnChange).toHaveBeenCalledWith(ONE_WAY);
   });
 });

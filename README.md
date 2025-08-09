@@ -133,6 +133,20 @@ yarn dev
 
 ---
 
+# App Requirements
+
+- Open and work on AirlineForm.tsx.
+- Populate the airline booking form using dummy data from Page.tsx.
+- Create selection options for 'To' and 'From' destinations and 'One Way' or 'Round Trip'.
+Implement the following functionalities:
+- Disable dates in the calendar based on the selected city.
+- Prompt the user to select a new date if an unavailable date is selected.
+- Implement form validation.
+- Style the component using TailwindCSS. Ensure it provides a user-friendly and responsive experience.
+- Update the URL on input change, so we can navigate back to the page with selected inputs.
+Example ?origin=LON&type=one-way&destination=NEW&departureDate=2023-10-04&returnDate=2023-11-01
+Submit the form to https://airline-booking-nine.vercel.app/api/booking via POST request with data as application/json.
+
 # 🧪 How to Test the Booking Form
 
 ## 1. Go to the App
@@ -145,11 +159,11 @@ yarn dev
   - Departure Date
   - Return Date
 
-✅ On large screens (≥1024px):
+✅ On large screens (laptops) (≥1024px):
 
 - Calendar should **not** be visible by default.
 
-✅ On small screens (<1024px):
+✅ On small screens (mobile/tablet) (<1024px):
 
 - Calendar should be **visible** by default.
 

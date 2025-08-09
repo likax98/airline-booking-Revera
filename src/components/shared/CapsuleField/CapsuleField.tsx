@@ -7,17 +7,17 @@ import { Label } from "@/components/ui/label";
 import { getErrorClasses } from "@/lib/utils/errors";
 
 export interface CapsuleFieldProps {
+  className?: string;
   id?: string;
   label: string;
-  className?: string;
   hasError?: boolean;
   children: ReactNode;
 }
 
 export const CapsuleField = ({
+  className,
   id,
   label,
-  className,
   hasError = false,
   children,
 }: CapsuleFieldProps): JSX.Element => {
@@ -27,8 +27,8 @@ export const CapsuleField = ({
     <div
       className={cn(
         "relative w-full h-14 min-w-60 group focus-within:text-black",
-        errorClasses,
-        className
+        className,
+        errorClasses
       )}>
       <Label
         className={cn(

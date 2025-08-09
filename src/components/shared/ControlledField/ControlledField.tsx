@@ -1,4 +1,4 @@
-import {
+import type {
   ControllerRenderProps,
   FieldValues,
   Path,
@@ -18,7 +18,7 @@ type ControlledFieldProps<
 > = {
   name: FieldName;
   control: UseFormReturn<Values>["control"];
-  renderErrorMessages?: boolean;
+  renderErrors?: boolean;
   render: (props: {
     field: ControllerRenderProps<Values, FieldName>;
     error: boolean;
@@ -31,7 +31,7 @@ export const ControlledField = <
 >({
   name,
   control,
-  renderErrorMessages = true,
+  renderErrors = false,
   render,
 }: ControlledFieldProps<Values, FieldName>): JSX.Element => (
   <FormField
@@ -40,8 +40,8 @@ export const ControlledField = <
         <FormControl>
           {render({ field, error: !!fieldState.error })}
         </FormControl>
-  
-        {renderErrorMessages && (
+
+        {renderErrors && (
           // Prevent layout jumping when error message appears
           <div className="min-h-1 md:min-h-[1.25rem]">
             <FormMessage />

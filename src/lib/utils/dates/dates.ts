@@ -38,6 +38,15 @@ export const startOfToday = (): Date => {
 };
 
 /**
+ * Converts a date string or date object into a timestamp
+ *
+ * @param {string | Date} date - The date to convert. Can be a Date object or a date string parsable by "Date"
+ * @returns {number} The timestamp representing the date in milliseconds
+ */
+export const toTimestamp = (date: string | Date): number =>
+  new Date(date).getTime();
+
+/**
  * Returns a date Object with a specified number of days added
  *
  * @param {Date} date - The base date
@@ -62,7 +71,7 @@ export const addDays = (date: Date, amount: number): Date => {
  * @returns {boolean} True if "date" is before "compareDate", otherwise false
  */
 export const isBefore = (date: Date, compareDate: Date): boolean =>
-  date.getTime() < compareDate.getTime();
+  toTimestamp(date) < toTimestamp(compareDate);
 
 /**
  * Checks if two dates fall on the same calendar day
@@ -97,6 +106,28 @@ export const dateToLocalISOString = (date?: Date): string => {
 };
 
 /**
+ * Validates that the provided Date object exactly matches the year, month, and day
+ * This is used to ensure that the Date object did not auto-correct an invalid date
+ *
+ * @param {string} input - The date string in "YYYY-MM-DD" format
+ * @param {Date} date - The Date object to validate against the input string
+ *
+ * @returns {boolean} True if the Date matches the input's year, month, and day exactly; otherwise, false
+ */
+export const isValidExactDate = (input: string, date: Date): boolean => {
+  const [yearStr, monthStr, dayStr] = input.split("-");
+  const year = Number(yearStr);
+  const month = Number(monthStr);
+  const day = Number(dayStr);
+
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() + 1 === month &&
+    date.getUTCDate() === day
+  );
+};
+
+/**
  * Parses a date string from a query parameter into a valid Date object
  *
  * @param {string | null | undefined} value - The date string to parse
@@ -104,13 +135,23 @@ export const dateToLocalISOString = (date?: Date): string => {
  * @returns {Date | undefined} A valid Date object if parsing succeeds, otherwise undefined
  */
 export const parseDateFromQuery = (value?: string | null): Date | undefined => {
-  if (!value) {
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+  if (!value || !datePattern.test(value)) {
     return undefined;
   }
 
-  const date = new Date(value);
+  const timestamp = toTimestamp(value);
+  if (isNaN(timestamp)) {
+    return undefined;
+  }
 
-  return isNaN(date.getTime()) ? undefined : date;
+  const date = new Date(timestamp);
+
+  if (!isValidExactDate(value, date)) {
+    return undefined;
+  }
+
+  return date;
 };
 
 /**

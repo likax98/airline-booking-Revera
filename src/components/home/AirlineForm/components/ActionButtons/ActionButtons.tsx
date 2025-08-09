@@ -11,6 +11,8 @@ interface Props {
   isSubmitting?: boolean;
 }
 
+const { BOOK_FLIGHT, BOOKING_FLIGHT_LOADING, RESET } = LABELS;
+
 export const ActionButtons = ({ isSubmitting }: Props): JSX.Element => {
   const router = useRouter();
   const { reset, formState } = useFormContext();
@@ -28,7 +30,7 @@ export const ActionButtons = ({ isSubmitting }: Props): JSX.Element => {
         variant="submit"
         size="form"
         disabled={isSubmitting}>
-        {isSubmitting ? LABELS.BOOKING_FLIGHT : LABELS.BOOK_FLIGHT}
+        {isSubmitting ? BOOKING_FLIGHT_LOADING : BOOK_FLIGHT}
       </Button>
 
       <Button
@@ -37,7 +39,7 @@ export const ActionButtons = ({ isSubmitting }: Props): JSX.Element => {
         variant="reset"
         size="form"
         onClick={handleReset}>
-        {LABELS.RESET}
+        {RESET}
       </Button>
     </div>
   );

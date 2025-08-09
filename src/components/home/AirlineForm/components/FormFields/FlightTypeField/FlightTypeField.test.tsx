@@ -7,19 +7,19 @@ import {
   type BookingFormValuesType,
 } from "@/components/home/AirlineForm/lib";
 
-import { FlightTypeOptionField } from "./FlightTypeOptionField";
+import { FlightTypeField } from "./FlightTypeField";
 
 const TestWrapper = (): JSX.Element => {
   const form = useForm<BookingFormValuesType>();
 
   return (
     <FormProvider {...form}>
-      <FlightTypeOptionField control={form.control} />
+      <FlightTypeField control={form.control} />
     </FormProvider>
   );
 };
 
-describe("FlightTypeOptionField", () => {
+describe("FlightTypeField", () => {
   it("renders correctly", () => {
     const { getByText } = render(<TestWrapper />);
 

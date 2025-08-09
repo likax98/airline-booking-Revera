@@ -1,12 +1,12 @@
 "use client";
 
-import { Control } from "react-hook-form";
+import type { Control } from "react-hook-form";
 
 import {
   BookingFormValuesType,
   DATE_FIELDS_CONFIG,
 } from "@/components/home/AirlineForm/lib";
-import { ControlledField } from "@/components/shared/ControlledField";
+import { ControlledField } from "@/components/shared";
 
 import { DateSelectButton } from "./DateSelectButton";
 
@@ -19,10 +19,12 @@ export const FlightDateFields = ({ control }: Props): JSX.Element => (
     {DATE_FIELDS_CONFIG.map(({ name, label }) => (
       <ControlledField
         key={name}
+        renderErrors
         render={({ field, error }) => (
           <DateSelectButton
             hasError={error}
-            {...{ label, value: field.value }}
+            value={field.value}
+            {...{ label }}
           />
         )}
         {...{ name, control }}

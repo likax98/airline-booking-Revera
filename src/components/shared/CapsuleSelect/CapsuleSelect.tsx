@@ -25,11 +25,11 @@ export interface CapsuleSelectProps {
 export const CapsuleSelect = ({
   label,
   options = [],
-  value,
+  value = "",
   hasError = false,
   onChange,
 }: CapsuleSelectProps): JSX.Element => {
-  const selectedValue = options.includes(value ?? "") ? value : "";
+  const selectedValue = options.includes(value) ? value : "";
   const placeholder = formatLabeledText("Select", label);
   const errorClasses = getErrorClasses(hasError, [
     "text",
@@ -54,12 +54,12 @@ export const CapsuleSelect = ({
         </SelectTrigger>
 
         <SelectContent>
-          {options.length > 0 ? (
+          {options.length ? (
             options.map((option) => (
               <SelectItem
+                className="flex justify-center cursor-pointer"
                 key={option}
-                value={option}
-                className="flex justify-center cursor-pointer">
+                value={option}>
                 {option}
               </SelectItem>
             ))

@@ -20,7 +20,7 @@ import {
   getDefaultValuesFromSearchParams,
 } from "./helpers";
 
-const [roundTrip] = FLIGHT_OPTIONS;
+const [ROUND_TRIP] = FLIGHT_OPTIONS;
 const sharedParams = {
   origin: "Paris",
   destination: "London",
@@ -32,7 +32,7 @@ describe("helpers", () => {
     const mockSetToDate = jest.fn();
 
     const date = new Date("2025-01-01");
-    const [fromDate] = DATE_FIELDS_CONFIG;
+    const [FROM_DATE] = DATE_FIELDS_CONFIG;
 
     beforeEach(() => {
       jest.clearAllMocks();
@@ -43,7 +43,7 @@ describe("helpers", () => {
         mockSetFromDate,
         mockSetToDate,
         date,
-        fromDate.label
+        FROM_DATE.label
       );
 
       expect(mockSetFromDate).toHaveBeenCalledWith(date);
@@ -67,7 +67,7 @@ describe("helpers", () => {
         mockSetFromDate,
         mockSetToDate,
         undefined,
-        fromDate.label
+        FROM_DATE['label']
       );
 
       expect(mockSetFromDate).not.toHaveBeenCalled();
@@ -258,7 +258,7 @@ describe("helpers", () => {
       const params = new URLSearchParams({
         [FormFields.Origin]: sharedParams.origin,
         [FormFields.Destination]: sharedParams.destination,
-        [FormFields.FlightTypeOption]: roundTrip,
+        [FormFields.Type]: ROUND_TRIP,
         [FormFields.FromDate]: "2025-08-10",
         [FormFields.ToDate]: "2025-08-12",
       });
@@ -266,7 +266,7 @@ describe("helpers", () => {
       const expected = {
         origin: sharedParams.origin,
         destination: sharedParams.destination,
-        flightTypeOption: roundTrip,
+        type: ROUND_TRIP,
         fromDate: new Date("2025-08-10"),
         toDate: new Date("2025-08-12"),
       };
@@ -276,7 +276,7 @@ describe("helpers", () => {
       expect(result).toMatchObject({
         origin: expected.origin,
         destination: expected.destination,
-        flightTypeOption: expected.flightTypeOption,
+        type: expected.type,
       });
 
       expect(result.fromDate).toEqual(expected.fromDate);
@@ -286,18 +286,18 @@ describe("helpers", () => {
     it("falls back to default values if params are missing", () => {
       const params = new URLSearchParams({
         [FormFields.Origin]: "",
-        [FormFields.FlightTypeOption]: "",
+        [FormFields.Type]: ROUND_TRIP,
       });
 
       const result = getDefaultValuesFromSearchParams(params);
 
-      const { origin, destination, flightTypeOption, fromDate, toDate } =
+      const { origin, destination, type, fromDate, toDate } =
         DEFAULT_BOOKING_FORM_VALUES;
 
       expect(result).toMatchObject({
         origin,
         destination,
-        flightTypeOption,
+        type,
       });
 
       expect(result.fromDate).toEqual(fromDate);

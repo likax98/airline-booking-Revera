@@ -13,7 +13,7 @@ import { Bounded } from "@/components/shared";
 import {
   ActionButtons,
   FlightDateCalendar,
-  FlightTypeOptionField,
+  FlightTypeField,
   RouteFields,
   FlightDateFields,
 } from "./components";
@@ -59,16 +59,15 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
     formState: { isSubmitting },
   } = form;
 
-  useFlightDateSync({
-    control,
-    setValue,
-  });
-  useFormToQuerySync(control);
   useQueryToFormInit(reset);
+  useFlightDateSync({ control, setValue });
+  useFormToQuerySync(control);
 
   const onSubmit = (data: BookingFormValuesType): void => {
     void submitBooking(data);
   };
+
+  const calendarProps = { destinations, control, setValue };
 
   return (
     <FlightDateFieldProvider>
@@ -87,20 +86,15 @@ export const AirlineForm = ({ destinations }: Props): JSX.Element => {
                   <RouteFields {...{ control, cities }} />
                   <FlightDateFields {...{ control }} />
                   <div className="block w-auto max-w-sm mx-auto lg:hidden">
-                    <FlightDateCalendar
-                      {...{ control, destinations, setValue }}
-                    />
+                    <FlightDateCalendar {...calendarProps} />
                   </div>
                 </div>
-                <FlightTypeOptionField {...{ control }} />
+                <FlightTypeField {...{ control }} />
                 <ActionButtons {...{ isSubmitting }} />
               </Bounded>
             </form>
           </FormProvider>
-          <FlightDateCalendar
-            className="hidden lg:block"
-            {...{ control, destinations, setValue }}
-          />
+          <FlightDateCalendar className="hidden lg:block" {...calendarProps} />
         </div>
       </div>
     </FlightDateFieldProvider>

@@ -26,8 +26,8 @@ import type {
 /**
  * Sets the selected date based on the active field label
  *
- * @param setFromDate - Callback to set the 'from' (return) date
- * @param setToDate - Callback to set the 'to' (departure) date
+ * @param setFromDate - Callback to set the "from" (return) date
+ * @param setToDate - Callback to set the "to" (departure) date
  * @param date - The selected date
  * @param activeField - The currently active date field label
  */
@@ -41,9 +41,9 @@ export const setSelectedFlightDate = (
     return;
   }
 
-  const [fromDate] = DATE_FIELDS_CONFIG;
+  const [FROM_DATE] = DATE_FIELDS_CONFIG;
 
-  return activeField === fromDate.label ? setFromDate(date) : setToDate(date);
+  return activeField === FROM_DATE.label ? setFromDate(date) : setToDate(date);
 };
 
 /**
@@ -168,8 +168,7 @@ export const getDefaultValuesFromSearchParams = (
   return {
     origin: get(FormFields.Origin) || defaultValues.origin,
     destination: get(FormFields.Destination) || defaultValues.destination,
-    flightTypeOption:
-      get(FormFields.FlightTypeOption) || defaultValues.flightTypeOption,
+    type: get(FormFields.Type) || defaultValues.type,
     fromDate:
       parseDateFromQuery(get(FormFields.FromDate)) ?? defaultValues.fromDate,
     toDate: parseDateFromQuery(get(FormFields.ToDate)) ?? defaultValues.toDate,

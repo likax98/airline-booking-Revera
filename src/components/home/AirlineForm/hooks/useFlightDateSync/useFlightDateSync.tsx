@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useWatch } from "react-hook-form";
-import type { Control, UseFormSetValue } from "react-hook-form";
+import { useWatch, type Control, type UseFormSetValue } from "react-hook-form";
+
+import { toTimestamp } from "@/lib/utils/dates";
 
 import { type BookingFormValuesType, FormFields } from "../../lib";
 
@@ -9,7 +10,7 @@ interface Props {
   setValue: UseFormSetValue<BookingFormValuesType>;
 }
 
-// It automatically updates the return date to match the departure date if the return date is earlier.
+// Automatically updates the return date to match the departure date if the return date is earlier
 export const useFlightDateSync = ({ control, setValue }: Props): void => {
   const [fromDate, toDate] = useWatch({
     control,
@@ -21,8 +22,8 @@ export const useFlightDateSync = ({ control, setValue }: Props): void => {
       return;
     }
 
-    const from = new Date(fromDate).getTime();
-    const to = new Date(toDate).getTime();
+    const from = toTimestamp(fromDate);
+    const to = toTimestamp(toDate);
 
     if (from > to) {
       setValue(FormFields.ToDate, fromDate, { shouldValidate: true });

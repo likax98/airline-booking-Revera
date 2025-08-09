@@ -10,7 +10,7 @@ export const mockOptions = ["Option 1", "Option 2", "Option 3"];
 export const bookingFormDefaultValues: BookingFormValuesType = {
   origin: mockCities[0],
   destination: mockCities[1],
+  type: FLIGHT_OPTIONS[0],
   fromDate: new Date(),
   toDate: new Date(),
-  flightTypeOption: FLIGHT_OPTIONS[0],
 };

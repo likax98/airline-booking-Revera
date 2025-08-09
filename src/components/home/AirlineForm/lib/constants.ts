@@ -1,11 +1,11 @@
-import { BookingFormValuesType, DateFieldConfigType } from "./types";
+import type { BookingFormValuesType, DateFieldConfigType } from "./types";
 
 export const FLIGHT_OPTIONS = ["round-trip", "one-way"];
 
 // Labels
 export const LABELS = {
   BOOK_FLIGHT: "Book Flight",
-  BOOKING_FLIGHT: "Booking",
+  BOOKING_FLIGHT_LOADING: "Booking",
   RESET: "Reset",
 };
 
@@ -44,7 +44,7 @@ export const TEST_IDS = {
 export enum FormFields {
   Origin = "origin",
   Destination = "destination",
-  FlightTypeOption = "flightTypeOption",
+  Type = "type",
   FromDate = "fromDate",
   ToDate = "toDate",
 }
@@ -70,7 +70,7 @@ export const DATE_FIELDS_CONFIG: DateFieldConfigType[] = [
 export const DEFAULT_BOOKING_FORM_VALUES: Partial<BookingFormValuesType> = {
   origin: "",
   destination: "",
+  type: FLIGHT_OPTIONS[0],
   fromDate: undefined,
   toDate: undefined,
-  flightTypeOption: FLIGHT_OPTIONS[0],
 };

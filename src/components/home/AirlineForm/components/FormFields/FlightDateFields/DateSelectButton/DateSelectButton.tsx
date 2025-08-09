@@ -23,9 +23,9 @@ export const DateSelectButton = ({
 }: DateSelectButtonProps): JSX.Element => {
   const { activeDateField, setActiveDateField } = useFlightDateField();
 
-  const isActiveDataField = activeDateField === label;
   const date = isValidDate(value) ? value : undefined;
   const placeholder = formatLabeledText("Select", label, "Date");
+  const isActiveDataField = activeDateField === label;
   const errorStyles = getErrorClasses(hasError, [
     "text",
     "border",

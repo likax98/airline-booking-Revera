@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useWatch, Control } from "react-hook-form";
+import { useWatch, type Control } from "react-hook-form";
 
 import {
   FormFields,
@@ -15,16 +15,16 @@ export const useFormToQuerySync = (
   const router = useRouter();
   const lastUrl = useRef("");
 
-  const [origin, destination, fromDate, toDate, flightTypeOption] = useWatch({
-    control,
-    name: [
-      FormFields.Origin,
-      FormFields.Destination,
-      FormFields.FromDate,
-      FormFields.ToDate,
-      FormFields.FlightTypeOption,
-    ],
-  });
+const [origin, destination, type, fromDate, toDate] = useWatch({
+  control,
+  name: [
+    FormFields.Origin,
+    FormFields.Destination,
+    FormFields.Type,
+    FormFields.FromDate,
+    FormFields.ToDate,
+  ],
+});
 
   useEffect(() => {
     const queryFields = { origin, destination, fromDate, toDate };
@@ -37,8 +37,8 @@ export const useFormToQuerySync = (
 
     const params = buildFlightSearchParams(queryFields);
 
-    if (flightTypeOption) {
-      params.set("type", flightTypeOption);
+    if (type) {
+      params.set("type", type);
     }
 
     const newUrl = `?${params.toString()}`;
@@ -47,7 +47,7 @@ export const useFormToQuerySync = (
       lastUrl.current = newUrl;
       router.push(newUrl);
     }
-  }, [origin, destination, fromDate, toDate, flightTypeOption, router]);
+  }, [origin, destination, type, fromDate, toDate, router]);
 };
 
 export const isFormValid = ({
@@ -56,17 +56,16 @@ export const isFormValid = ({
   fromDate,
   toDate,
 }: Partial<BookingFormValuesType>): boolean => {
-  const hasRequiredLocations = Boolean(origin) && Boolean(destination);
+  const hasRequiredLocations = !!origin && !!destination;
   const hasValidDates = isValidDate(fromDate) && isValidDate(toDate);
 
   return hasRequiredLocations && hasValidDates;
 };
 
 export const buildFlightSearchParams = (
-  values: Omit<BookingFormValuesType, "flightTypeOption">
+  values: Omit<BookingFormValuesType, "type">
 ): URLSearchParams => {
   const { origin, destination, fromDate, toDate } = values;
-
   const params = new URLSearchParams();
 
   params.set("origin", origin);
